@@ -1,8 +1,5 @@
 <div class="max-w-3xl mx-auto mt-12">
     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-        <div class="bg-blue-800 text-white text-md text-center py-4">
-            NEW AIRLINE FORM
-        </div>
         <form wire:submit.prevent="submitForm">
             <div class="form-group">
                 <label class="form-label">
@@ -99,3 +96,5 @@
         </form>
     </div>
 </div>
+
+
