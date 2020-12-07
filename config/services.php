@@ -25,9 +25,20 @@ return [
     ],
 
     'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
-        'secret' => env('AWS_SECRET_ACCESS_KEY'),
-        'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+        'key' => env('SES_ACCESS_KEY_ID'),
+        'secret' => env('SES_SECRET_ACCESS_KEY'),
+        'region' => env('SES_DEFAULT_REGION', 'us-east-1'),
+    ],
+
+    'recaptcha' => [
+        'key' => env('RECAPTCHA_KEY'),
+        'test_key' => env('RECAPTCHA_TEST_KEY'),
+        'secret' => env('RECAPTCHA_SECRET'),
+        'test_secret' => env('RECAPTCHA_TEST_SECRET'),
+    ],
+
+    'giants_api' => [
+        'token' => env('GIANTPILOTS_API_TOKEN'),
     ],
 
 ];
