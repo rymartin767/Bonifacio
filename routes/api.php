@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->get('/airlines', function () {
-    return Airline::all();
-});
+Route::get('/airlines', [AirlineController::class, 'index'])->middleware('auth:sanctum');
+
+Route::get('/airlines/{airline:icao}', [AirlineController::class, 'show'])->middleware('auth:sanctum');
