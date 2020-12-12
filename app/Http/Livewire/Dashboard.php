@@ -18,6 +18,7 @@ class Dashboard extends Component
     public $union;
     public $pilots;
     public $hiring;
+    public $url;
 
     public function rules()
     {
@@ -28,7 +29,8 @@ class Dashboard extends Component
             'union' => 'required|in:alpa,apa,ipa,none,ibt,sapa',
             'pilots' => 'required|numeric|digits_between:3,5',
             'hiring' => 'required|boolean',
-            'icao' => ['required','unique:airlines','size:3', new ScalesFoundOnAws, new ValidateScales]
+            'icao' => ['required','unique:airlines','size:3', new ScalesFoundOnAws, new ValidateScales],
+            'url' => 'required|string|min:10|max:255'
         ];
     }
 
@@ -47,6 +49,7 @@ class Dashboard extends Component
             'union' => $this->union,
             'pilots' => $this->pilots,
             'hiring' => $this->hiring,
+            'url' => $this->url
         ];
     }
 

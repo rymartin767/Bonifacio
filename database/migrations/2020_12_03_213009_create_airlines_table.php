@@ -22,6 +22,7 @@ class CreateAirlinesTable extends Migration
             $table->string('union');
             $table->unsignedInteger('pilots');
             $table->boolean('hiring');
+            $table->string('url');
             $table->timestamps();
         });
     }

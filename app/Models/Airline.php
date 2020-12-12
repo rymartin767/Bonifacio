@@ -12,7 +12,7 @@ class Airline extends Model
     use SeedScales;
 
     protected $fillable = [
-        'sector', 'name', 'icao', 'iata', 'union', 'pilots', 'hiring'
+        'sector', 'name', 'icao', 'iata', 'union', 'pilots', 'hiring', 'url'
     ];
 
     protected $casts = [

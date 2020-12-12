@@ -80,6 +80,15 @@
                     <div class="form-error">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="form-group">
+                <label class="form-label">
+                    Airline Url
+                </label>
+                <input wire:model.lazy="url" type="string" class="form-input" autocomplete="url">
+                @error('url')
+                    <div class="form-error">{{ $message }}</div>
+                @enderror
+            </div>
             <div class="mt-4 flex items-center justify-end px-4 py-3 bg-gray-100 text-right sm:px-6">
                 @isset($status)
                     <div x-data="{ shown: false, timeout: null }" x-init="() => { clearTimeout(timeout); shown = true; timeout = setTimeout(() => { shown = false }, 2000); }" x-show.transition.opacity.out.duration.1500ms="shown" class="text-sm text-green-400 mr-6 pt-1">{{ $status }}</div>
