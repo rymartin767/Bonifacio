@@ -39,6 +39,7 @@ return [
 
     'giants_api' => [
         'token' => env('GIANTPILOTS_API_TOKEN'),
+        'email' => env('ADMIN_EMAIL')
     ],
 
 ];
