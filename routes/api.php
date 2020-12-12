@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Airline;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AirlineController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
