@@ -17,7 +17,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->email = config('services.giants_api.email')) {
+        if(Auth::user()->email === config('services.giants_api.email')) {
             return $next($request);
         }
 
