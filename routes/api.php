@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AirlineController;
+use App\Http\Controllers\ScaleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/airlines', [AirlineController::class, 'index'])->middleware('auth:sanctum');
 
 Route::get('/airlines/{airline:icao}', [AirlineController::class, 'show'])->middleware('auth:sanctum');
+Route::get('/airlines/{airline:icao}/scales', [ScaleController::class, 'show'])->middleware('auth:sanctum');
