@@ -9,7 +9,8 @@ class AirlineController extends Controller
 {
     public function index()
     {
-        return Airline::all();
+        $search = request('search') ?? '';
+        return Airline::where('name', 'like', '%'.$search.'%')->get();
     }
 
     public function show(Airline $airline)
