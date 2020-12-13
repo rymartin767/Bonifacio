@@ -14,6 +14,6 @@ class AirlineController extends Controller
 
     public function show(Airline $airline)
     {
-        return $airline;
+        return $airline->load('scales');
     }
 }
