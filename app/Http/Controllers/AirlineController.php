@@ -8,6 +8,7 @@ class AirlineController extends Controller
 {
     public function index()
     {
+        // returned in data key
         return Airline::when(request('hiring'), function ($query) {
             return $query
                 ->where('name', 'like', '%' . request('search') . '%')
