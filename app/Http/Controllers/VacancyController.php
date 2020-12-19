@@ -13,7 +13,13 @@ class VacancyController extends Controller
 
     public function show()
     {
-        $employee = request('employee');
-        return Vacancy::where('emp', $employee)->first()->toJson();
+        $award = Vacancy::where('emp', request('employee'))->first();
+        if(!is_null($award)) {
+            return $award->toJson();
+        }
+
+        return response()->json([
+            'status' => 403
+        ]);
     }
 }
