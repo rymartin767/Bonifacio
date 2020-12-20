@@ -26,7 +26,7 @@ class AirlineController extends Controller
     public function show(Airline $airline)
     {
         return response()->json([
-            'status' => 200,
+            'status' => 201,
             'data' => $airline->load('scales')
         ]);
     }
