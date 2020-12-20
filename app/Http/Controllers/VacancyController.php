@@ -15,7 +15,10 @@ class VacancyController extends Controller
     {
         $award = Vacancy::where('emp', request('employee'))->first();
         if(!is_null($award)) {
-            return $award->toJson();
+            return response()->json([
+                'status' => 200,
+                'data' => $award
+            ]);
         }
 
         return response()->json([
