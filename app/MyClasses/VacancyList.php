@@ -133,6 +133,7 @@ class VacancyList
                 'award_base' => $request->award_base,
                 'award_seat' => $request->award_seat,
                 'award_fleet' => $request->award_fleet,
+                'upgrade' => $request->seat === $request->award_seat ? false : true,
                 'month' => $this->month()
             ]);
         }

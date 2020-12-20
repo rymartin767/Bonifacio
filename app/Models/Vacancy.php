@@ -10,7 +10,7 @@ class Vacancy extends Model
     use HasFactory;
 
     protected $fillable = [
-        'base_seniority', 'emp', 'base', 'fleet', 'seat', 'award_base', 'award_fleet', 'award_seat', 'month'
+        'base_seniority', 'emp', 'base', 'fleet', 'seat', 'award_base', 'award_fleet', 'award_seat', 'upgrade', 'month'
     ];
 
     protected $casts = [ 
