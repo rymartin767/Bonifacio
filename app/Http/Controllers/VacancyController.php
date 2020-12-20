@@ -8,9 +8,16 @@ class VacancyController extends Controller
 {
     public function index()
     {
+        $vacancies = Vacancy::all();
+        if($vacancies) {
+            return response()->json([
+                'status' => 201,
+                'data' => Vacancy::all()
+            ]);
+        }
+
         return response()->json([
-            'status' => 200,
-            'data' => Vacancy::all()
+            'status' => 403
         ]);
     }
 
@@ -19,7 +26,7 @@ class VacancyController extends Controller
         $award = Vacancy::where('emp', request('employee'))->first();
         if($award) {
             return response()->json([
-                'status' => 200,
+                'status' => 201,
                 'data' => $award
             ]);
         }
