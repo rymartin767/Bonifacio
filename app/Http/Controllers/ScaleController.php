@@ -9,6 +9,9 @@ class ScaleController extends Controller
 {
     public function show(Airline $airline)
     {
-        return $airline->scales;
+        return response()->json([
+            'status' => 200,
+            'data' => $airline->scales
+        ]);
     }
 }
