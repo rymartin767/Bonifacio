@@ -121,8 +121,6 @@ class VacancyList
 
     public function saveAwards($validatedRequests)
     {
-        Vacancy::truncate();
-
         foreach($validatedRequests as $request) {
             Vacancy::create([
                 'base_seniority' => $request->base_seniority,
