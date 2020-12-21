@@ -2,9 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Airline;
-use Aws\StorageGateway\StorageGatewayClient;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Airline;
 use Livewire\Component;
 
 class SeedAirlines extends Component
@@ -27,7 +26,7 @@ class SeedAirlines extends Component
         $airlines = json_decode($json);
 
         foreach($airlines as $airline) {
-            Airline::create([
+            $airline = Airline::create([
                 'sector' => $airline->sector,
                 'name' => $airline->name,
                 'icao' => $airline->icao,
@@ -37,6 +36,10 @@ class SeedAirlines extends Component
                 'hiring' => $airline->hiring,
                 'url' => $airline->url
             ]);
+
+            if($airline) {
+                $airline->seedScales();
+            }
         }
 
         $this->submitSuccess();
