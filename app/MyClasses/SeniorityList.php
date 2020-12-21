@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Seniority;
+namespace App\MyClasses;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -11,9 +11,14 @@ use Carbon\Carbon;
 use Exception;
 
 
-trait StoreList
+class SeniorityList
 {
-    protected function validatePilotData(string $pathToCsv, Carbon $month)
+    public function __construct(string $pathToCsv)
+    {
+        $this->pathToTsv = $pathToCsv;
+    }
+
+    public function validatePilotData(string $pathToCsv, Carbon $month)
     {
         $validated = collect([]);
         
@@ -103,7 +108,7 @@ trait StoreList
         return $validator;
     }
 
-    protected function storePilotData(Collection $validated, Carbon $month)
+    public function storePilotData(Collection $validated, Carbon $month)
     {
         $total = 0;
         foreach ($validated as $pilot) {
@@ -121,5 +126,7 @@ trait StoreList
             ]);
             $total++;
         }
+
+        return $total;
     }
 }

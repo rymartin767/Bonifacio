@@ -2,10 +2,8 @@
 
 namespace App\Http\Livewire;
 
-
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Cache;
-use App\Actions\Seniority\StoreList;
+use App\MyClasses\SeniorityList;
 use Illuminate\Support\Str;
 use App\Models\Seniority;
 use Livewire\Component;
@@ -13,8 +11,6 @@ use Carbon\Carbon;
 
 class StoreSeniority extends Component
 {
-    use StoreList;
-
     public $status;
 
     public $pathToCsv;
@@ -36,18 +32,19 @@ class StoreSeniority extends Component
     {
         $this->validate();
 
-        $month = Carbon::parse(Str::of($this->pathToCsv)->replace('_', ' ')->substr(-12, 8));
-        $validated = $this->validatePilotData($this->pathToCsv, $month);
-        $this->storePilotData($validated, $month);
+        $list = new SeniorityList($this->pathToCsv);
 
-        $this->submitSuccess();
+        $month = Carbon::parse(Str::of($this->pathToCsv)->replace('_', ' ')->substr(-12, 8));
+        $validated = $list->validatePilotData($this->pathToCsv, $month);
+        $count = $list->storePilotData($validated, $month);
+
+        $this->submitSuccess($count);
     }
 
-    private function submitSuccess()
+    private function submitSuccess(int $count)
     {
         $this->reset();
-        Cache::flush();
-        $this->status = "Saved! Cache cleared!";
+        $this->status = $count . " Pilots Saved!";
         $this->savedMonths = Seniority::pluck('month')->unique();
     }
 
