@@ -34,7 +34,7 @@ class SeedAirlines extends Component
                 'union' => $airline->union,
                 'pilots' => $airline->pilots,
                 'hiring' => $airline->hiring,
-                'url' => $airline->url
+                'url' => "#"
             ]);
 
             if($airline) {
