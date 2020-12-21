@@ -12,10 +12,24 @@
                     </button>
                     <button 
                         x-show.transition="open" 
-                        class="w-full px-4 py-2 text-right text-sm font-medium text-white focus:outline-none bg-indigo-300"
-                        wire:click="$set('selected', 'airlines')"
+                        class="w-full px-4 py-2 text-right text-sm font-medium text-white focus:outline-none bg-indigo-300 border-b border-gray-50 hover:bg-indigo-500"
+                        wire:click="$set('selected', 'index-airlines')"
+                    >
+                        Airline Index
+                    </button>
+                    <button 
+                        x-show.transition="open" 
+                        class="w-full px-4 py-2 text-right text-sm font-medium text-white focus:outline-none bg-indigo-300 border-b border-gray-50 hover:bg-indigo-500"
+                        wire:click="$set('selected', 'store-airlines')"
                     >
                         Add Airline
+                    </button>
+                    <button 
+                        x-show.transition="open" 
+                        class="w-full px-4 py-2 text-right text-sm font-medium text-white focus:outline-none bg-indigo-300 hover:bg-indigo-500"
+                        wire:click="$set('selected', 'seed-airlines')"
+                    >
+                        Seed Airlines
                     </button>
                 </div>
                 <div x-data="{ open:false }">
@@ -67,8 +81,15 @@
             </div>
         </div>
         <div class="col-span-10 sm:col-span-6 px-8">
+            @if($selected === 'index-airlines')
+                @livewire('index-airlines')
+            @endif
             @if($selected === 'airlines')
-                @livewire('store-airline')
+                @livewire('store-airlines')
+            @endif
+
+            @if($selected === 'seed-airlines')
+                @livewire('seed-airlines')
             @endif
             
             @if($selected === 'store-seniority')
