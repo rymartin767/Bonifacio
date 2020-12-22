@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AirlineController;
 use App\Http\Controllers\ScaleController;
+use App\Http\Controllers\SeniorityController;
 use App\Http\Controllers\VacancyController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -27,3 +28,5 @@ Route::get('/airlines/{airline:icao}/scales', [ScaleController::class, 'show'])-
 
 Route::get('/vacancies', [VacancyController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/award', [VacancyController::class, 'show'])->middleware('auth:sanctum');
+
+Route::get('/seniorities', [SeniorityController::class, 'show'])->middleware('auth:sanctum');
