@@ -9,6 +9,7 @@ class VacancyController extends Controller
     public function index()
     {
         $vacancies = Vacancy::all();
+
         if($vacancies) {
             return response()->json([
                 'status' => 201,
@@ -17,7 +18,7 @@ class VacancyController extends Controller
         }
 
         return response()->json([
-            'status' => 403
+            'status' => 404
         ]);
     }
 
@@ -32,7 +33,7 @@ class VacancyController extends Controller
         }
 
         return response()->json([
-            'status' => 403
+            'status' => 404
         ]);
     }
 }
