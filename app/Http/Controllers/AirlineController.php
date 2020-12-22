@@ -13,13 +13,11 @@ class AirlineController extends Controller
             return $query
                 ->where('name', 'like', '%' . request('search') . '%')
                 ->where('hiring', true)
-                ->orderBy('updated_at', 'desc')
-                ->paginate(10);
+                ->orderBy('updated_at', 'desc');
         }, function ($query) {
             return $query
                 ->where('name', 'like', '%' . request('search') . '%')
-                ->orderBy('updated_at', 'desc')
-                ->paginate(10);
+                ->orderBy('updated_at', 'desc');
         })->toJson();
     }
 
