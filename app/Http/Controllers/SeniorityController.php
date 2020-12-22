@@ -6,7 +6,7 @@ use App\Models\Seniority;
 
 class SeniorityController extends Controller
 {
-    public function test()
+    public function show()
     {
         request('employee') ?
             $months = Seniority::select(['sen', 'phire', 'emp', 'doh', 'seat', 'fleet', 'domicile', 'retire', 'month'])
