@@ -30,3 +30,4 @@ Route::get('/vacancies', [VacancyController::class, 'index'])->middleware('auth:
 Route::get('/award', [VacancyController::class, 'show'])->middleware('auth:sanctum');
 
 Route::get('/seniorities', [SeniorityController::class, 'show'])->middleware('auth:sanctum');
+Route::get('/seniorityList', [SeniorityController::class, 'index'])->middleware('auth:sanctum');

@@ -6,6 +6,24 @@ use App\Models\Seniority;
 
 class SeniorityController extends Controller
 {
+    public function index()
+    {
+        request('month') ?
+            $list = Seniority::where('month', request('month'))->get() :
+            $list = collect();
+        
+        if($list->isNotEmpty()) {
+            return response()->json([
+                'status' => 201,
+                'data' => $list
+            ]);
+        }
+
+        return response()->json([
+            'status' => 404
+        ]);
+    }
+
     public function show()
     {
         request('employee') ?
