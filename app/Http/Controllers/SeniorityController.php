@@ -10,7 +10,7 @@ class SeniorityController extends Controller
     {
         request('month') ?
             $list = Seniority::where('month', request('month'))->get() :
-            $list = collect();
+            $list = Seniority::where('month', Seniority::pluck('month')->unique()->sort()->last())->get();
         
         if($list->isNotEmpty()) {
             return response()->json([
