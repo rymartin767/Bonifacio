@@ -13,7 +13,7 @@ class VacancyController extends Controller
         if($vacancies) {
             return response()->json([
                 'status' => 201,
-                'data' => Vacancy::all()
+                'data' => $vacancies
             ]);
         }
 
