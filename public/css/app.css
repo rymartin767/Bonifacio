@@ -31773,7 +31773,7 @@ video {
 
 .btn {
   --tw-bg-opacity: 1;
-  background-color: rgba(79, 70, 229, var(--tw-bg-opacity))
+  background-color: rgba(79, 70, 229, var(--tw-bg-opacity));
 }
 
 .btn:hover {
