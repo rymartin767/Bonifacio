@@ -2,8 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Airline;
 use Livewire\Component;
+use App\Models\Airline;
+use Carbon\Carbon;
 
 class IndexAirlines extends Component
 {
@@ -13,6 +14,8 @@ class IndexAirlines extends Component
     {
         $seeded = $airline->seedScales();
         if($seeded) {
+            $airline->updated_at = Carbon::now();
+            $airline->save();
             $this->status = 'Updated!';
         } else {
             $this->status = 'Exception Caught';
@@ -22,7 +25,7 @@ class IndexAirlines extends Component
     public function render()
     {
         return view('livewire.index-airlines', [
-            'airlines' => Airline::all()
+            'airlines' => Airline::all()->sortDesc()
         ]);
     }
 }
