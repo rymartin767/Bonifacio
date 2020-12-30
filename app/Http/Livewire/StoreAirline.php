@@ -39,7 +39,7 @@ class StoreAirline extends Component
         $this->validateOnly($propertyName);
     }
 
-    private function formData()
+    protected function formData()
     {
         return [
             'sector' => $this->sector,
@@ -59,12 +59,12 @@ class StoreAirline extends Component
 
         $airline = Airline::create($this->formData());
 
-        if($airline->seedScales()) {
-            $this->submitSuccess($airline->name);
+        if($airline) {
+            $airline->seedScales() ? $this->submitSuccess($airline->name) : $this->status = "Airline Created but Scales failed.";
         }
     }
 
-    private function submitSuccess($airline)
+    protected function submitSuccess($airline)
     {
         $this->reset();
         $this->status = $airline . " and Scales Saved!";
