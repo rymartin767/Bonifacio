@@ -25,7 +25,7 @@ class IndexAirlines extends Component
     public function render()
     {
         return view('livewire.index-airlines', [
-            'airlines' => Airline::all()->sortDesc()
+            'airlines' => Airline::all()->sortByDesc('updated_at')
         ]);
     }
 }
