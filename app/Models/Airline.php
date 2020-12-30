@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Actions\Airlines\SeedScales;
 
 class Airline extends Model
 {
     use HasFactory;
-    use SeedScales;
 
     protected $fillable = [
         'sector', 'name', 'icao', 'iata', 'union', 'pilots', 'hiring', 'url'
