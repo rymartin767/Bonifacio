@@ -10,6 +10,7 @@ trait SeedScales
     public function seedScales()
     {
         try {
+            $this->scales()->delete();
             $file = Storage::disk('s3-public')->get('/scales/' . $this->icao . '.csv');
             $lines = explode("\r\n", $file);
             foreach($lines as $line) {
