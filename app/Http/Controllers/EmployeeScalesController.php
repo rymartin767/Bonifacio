@@ -32,10 +32,12 @@ class EmployeeScalesController extends Controller
 
         if($scales) {
             if(request('year') && request('fleet') && request('seat')) {
-                $scales = $scales->where('year', request('year'))->where('fleet', request('fleet'))->first()->request('seat');
+                $scales = $scales->where('year', request('year'))->where('fleet', request('fleet'))->first();
+                $seat = request('seat');
+                $rate = $scales[$seat];
                 return response()->json([
                     'status' => 201,
-                    'data' => $scales
+                    'data' => $rate
                 ]);
             }
         }
