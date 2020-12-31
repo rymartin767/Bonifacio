@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AirlineController;
+use App\Http\Controllers\EmployeeScalesController;
 use App\Http\Controllers\MonthlyStaffingChartController;
 use App\Http\Controllers\ScaleController;
 use App\Http\Controllers\SeniorityController;
@@ -34,3 +35,6 @@ Route::get('/seniorities', [SeniorityController::class, 'show'])->middleware('au
 Route::get('/seniorityList', [SeniorityController::class, 'index'])->middleware('auth:sanctum');
 
 Route::get('charts/monthlyStaffing', [MonthlyStaffingChartController::class, 'show'])->middleware('auth:sanctum');
+
+Route::get('employeeScales', [EmployeeScalesController::class, 'index'])->middleware('auth:sanctum');
+Route::get('employeeRate', [EmployeeScalesController::class, 'show'])->middleware('auth:sanctum');
