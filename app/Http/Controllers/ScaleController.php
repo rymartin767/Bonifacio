@@ -9,7 +9,7 @@ class ScaleController extends Controller
     public function show()
     {
         if(request('airline')) {
-            $airline = Airline::where('icao', request('icao'))->first();
+            $airline = Airline::where('icao', request('airline'))->first();
             if($airline) {
                 return response()->json([
                     'status' => 201,
