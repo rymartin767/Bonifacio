@@ -1,0 +1,260 @@
+{
+    "AAL": [
+        "BOS",
+        "CLT",
+        "DCA",
+        "DFW",
+        "LAX",
+        "LGA",
+        "ORD",
+        "MIA",
+        "PHL",
+        "PHX"
+    ],
+    "AAY": [
+        "ABE",
+        "AVL",
+        "BLI",
+        "BNA",
+        "CVG",
+        "DSM",
+        "FLL",
+        "GRR",
+        "IWA",
+        "IND",
+        "LAS",
+        "LAX",
+        "PGD",
+        "PIE",
+        "PIT",
+        "SAV",
+        "SFB",
+        "TYS",
+        "VPS"
+    ],
+    "ABX": [
+        "CVG"
+    ],
+    "ASA": {
+        "hubs": [
+            "ANC",
+            "LAX",
+            "PDX",
+            "SEA",
+            "SFO"
+        ],
+        "link": "https://alaskaair.jobs/career-opportunities/pilots/alaska-airlines/",
+        "quals": [
+            "High school diploma or equivalent",
+            "Two-or four-year degree from an accredited college preferred",
+            "Valid passport allowing unrestricted travel to and from the U.S.",
+            "Minimum age of 23 years",
+            "Authorization to work in the U.S.",
+            "Valid driver’s license",
+            "Current First Class FAA Medical Certificate",
+            "An FAA Airline Transport Pilot (ATP) certificate",
+            "Correctable vision in both eyes to 20/20",
+            "A minimum of 2,000 hours of total flight time in a fixed wing aircraft or 1,200 hours of total flight time in a high performance military aircraft",
+            "50% of rotor-wing flight time up to 1,000 hours may be counted toward total flight time",
+            "Minimum of 50 hours of flight time within the last 12 months",
+            "Professional demeanor and appearance",
+            "Proficiency with Microsoft Office, Adobe Acrobat, and Internet email functions",
+            "Must be comfortable with a domicile in Seattle, WA; Los Angeles, CA; Anchorage, AK; Portland, OR; San Francisco, CA"
+        ]
+    },
+    "ATI": [
+        "HOME"
+    ],
+    "CKS": [
+        "HOME"
+    ],
+    "DAL": {
+        "hubs": [
+            "ATL",
+            "CVG",
+            "DTW",
+            "LAX",
+            "MSP",
+            "NYC",
+            "SEA",
+            "SLC"
+        ],
+        "quals": [
+            "At least 23 years of age.",
+            "Graduate of a four-year degree program from a college or university accredited by a U.S. Dept. of Education recognized accrediting organization.",
+            "Degrees obtained from a non-U.S. institution must be evaluated for equivalency to U.S. degrees by a member organization of the National Association of Credential Evaluation Services (NACES).",
+            "Current passport or other travel documents enabling the bearer to freely exit and re-enter the U.S. (multiple reentry status) and be legally eligible to work in the U.S.",
+            "FAA Commercial Pilot Certificate with Instrument - Airplane.",
+            "Current FAA First Class Medical Certificate.",
+            "All aeronautical experience requirements for an ATP, Airplane category rating, as set forth in 14 CFR §61.159.",
+            "Current ATP written exam.",
+            "Minimum of 1,500 hours of total documented flight time.",
+            "Minimum of 1,000 hours of fixed wing turbine time (airplane and powered lift combined).",
+            "Minimum of 250 hours PIC or SIC as defined in 14 CFR §61.159(a)(5) in an airplane category.",
+            "Minimum of 50 hours of multi-engine airplane time.",
+            "Applicants invited to interview must provide appropriate documentation of all flight hours, FAA pilot certificates, FAA medical certificate and college transcripts.",
+            "FCC Radiotelephone Operator's Permit.",
+            "DOT required pre-employment drug test.",
+            "TSA required fingerprint based Criminal History Records Check and a Delta background check."
+        ]
+    },
+    "FDX": {
+        "hubs": [
+            "ANC",
+            "CGN",
+            "HKG",
+            "IND",
+            "LAX",
+            "MEM"
+        ],
+        "link": "https://careers.fedex.com/pilot",
+        "quals": [
+            "Bachelor’s Degree from an accredited college or university",
+            "English language proficiency",
+            "Proven leadership ability",
+            "Excellent communications skills",
+            "Accurate and timely decision making, including threat and error mitigation strategies",
+            "Close attention to detail",
+            "Ability to work during the day or night, including weekends and holidays",
+            "Punctual and reliable regular attendance",
+            "Current valid passport and any other necessary travel documentations",
+            "Airline Transport Pilot (ATP) Certificate",
+            "Current First Class Medical Certificate",
+            "Radiotelephone Operators Permit",
+            "Secure Identification Display Area (SIDA) Badge eligibility",
+            "Successful completion of pre-employment drug test",
+            "Successful completion of Pilot Records Improvement Act (PRIA) evaluation",
+            "1500 hours total fixed-wing",
+            "1000 hours PIC in jet aircraft is preferred; multi-engine turbo-prop aircraft, 12,500 pounds or greater; certain single engine turbo-prop aircraft, or combination thereof. A minimum of 500 hours PIC as described is required."
+        ]
+    },
+    "FFT": {
+        "hubs": [
+            "DEN",
+            "LAS",
+            "MCO",
+            "MIA",
+            "ORD",
+            "PHL"
+        ],
+        "link": "https://www.flyfrontier.com/careers/pilot?mobile=true",
+        "quals": [
+            "1500 hours total time (2500 preferred)",
+            "750 hours multi-engine fixed wing",
+            "500 hours pilot in command (PIC)",
+            "500 hours jet/turbo-prop",
+            "Frontier considers only hours in fixed wing/rotary aircraft as flight time towards minimum qualifications. Hours logged in flight simulators, or as flight engineer, bombardier, navigator, WSO, EWO, RIO, NFO, UAV, or Special Crew will not be considered as flight time for these purposes.",
+            "Current FAA Class 1 Medical Certificate",
+            "Vision corrected to 20/20",
+            "ATP Certificate",
+            "FCC Restricted Radio Operator’s Permit",
+            "Valid Passport, with machine-readable print, and the ability to travel in and out of the United States",
+            "Authorization to work in the United States",
+            "Ability to travel in and out of the U.S. to all cities/countries served by Frontier Airlines, Inc.",
+            "Ability to relocate or commute",
+            "Ability and willingness to work weekends, nights, holidays and overnight trips",
+            "Ability and desire to maintain a well-groomed and professional appearance",
+            "Ability to pass pre-employment drug testing and background checks",
+            "Experience with sophisticated aircraft equipment including Electronic Flight Instrument Systems (EFIS) and Flight Management Systems (FMS) preferred"
+        ]
+    },
+    "GTI": {
+        "hubs": [
+            "ANC",
+            "CVG",
+            "JFK",
+            "LAX",
+            "MIA",
+            "ONT",
+            "ORD",
+            "PAE"
+        ],
+        "link": "https://careers.atlasairworldwide.com/careers/",
+        "quals": [
+            "Hold a current unrestricted ATP certificate with an airplane category multi-engine class rating and English proficiency endorsement",
+            "Hold a current FAA First Class Medical Certificate",
+            "Hold an FCC Restricted Radiotelephone Operator Permit",
+            "Hold a valid passport with no restrictions on international travel",
+            "Legally authorized to work in the United States",
+            "Have a minimum of 1500 hours of total time",
+            "Have a minimum of 500 hours of turbine time",
+            "Have a minimum of 1000 fixed wing or 500 hours with a 121 carrier",
+            "Minimum age of 23 (all Atlas pilot positions are subject to FAA 121 mandatory retirement regulations)",
+            "Must have the ability to pass a 10 year security background check and a DOT pre-employment test."
+        ] 
+    },
+    "JBU": [
+        "BOS",
+        "FLL",
+        "JFK",
+        "LGB",
+        "MCO"
+    ],
+    "NKS": [
+        "ACY",
+        "DFW",
+        "DTW",
+        "FLL",
+        "LAS",
+        "MCO",
+        "ORD"
+    ],
+    "SCX": {
+        "hubs": [
+            "MSP"
+        ],
+        "link": "https://www.airlineapps.com/jobs/default.aspx?emp=Sun-Country-Airlines",
+        "quals": [
+            "Legal authorization to work in the United States",
+            "Must be able to read, write, fluently speak and understand the English Language",
+            "Current FAA First Class Medical Certificate",
+            "FCC Radio License",
+            "Valid US passport or valid Passport with Green Card and the ability to travel to and from all cities and countries served by Sun Country",
+            "Valid US driver's license",
+            "High School Diploma, GED or equivalent, Bachelor's Degree preferred",
+            "Recent flight experience preferred",
+            "1500 hours",
+            "At least 23 years old",
+            "500 hours of cross country",
+            "100 hours of night",
+            "75 hours of instrument",
+            "50 hours of multi-engine (25 actual and up to 25 hours of simulator time)",
+            "See hiring page for restricted ATP Minimums"
+        ]
+    },
+    "SWA": [
+        "ATL",
+        "BWI",
+        "DAL",
+        "DEN",
+        "HOU",
+        "LAS",
+        "LAX",
+        "MCO",
+        "MDW",
+        "OAK",
+        "PHX"
+    ],
+    "UAL": [
+        "CLE",
+        "DEN",
+        "EWR",
+        "GUM",
+        "IAD",
+        "IAH",
+        "LAX",
+        "ORD",
+        "SFO"
+    ],
+    "UPS": {
+        "hubs": [
+            "ANC",
+            "MIA",
+            "ONT",
+            "SDF"
+        ],
+        "quals": [
+
+        ]
+    }
+}
