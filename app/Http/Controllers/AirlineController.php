@@ -23,11 +23,25 @@ class AirlineController extends Controller
         })->toJson();
     }
 
-    public function show(Airline $airline)
+    public function show()
     {
+        if(request('icao')) {
+            $airline = Airline::where('icao', request('icao'))->first();
+            if($airline) {
+                $json = json_decode(file_get_contents('json/airlines.json'));
+                $icao = $airline->icao;
+                return response()->json([
+                    'status' => 201,
+                    'data' => [
+                        'airline' => $airline->load('scales'),
+                        'quals' => $json->$icao->quals ?? []
+                    ]
+                ]);
+            }
+        }
+
         return response()->json([
-            'status' => 201,
-            'data' => $airline->load('scales')
+            'status' => 404
         ]);
     }
 }
