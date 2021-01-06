@@ -15,11 +15,7 @@ class EmployeeScalesController extends Controller
                 $scales = Airline::atlas()->scales()->select(['fleet', request('seat')])->where('fleet', request('fleet'))->pluck(request('seat'));
                 return response()->json([
                     'status' => 201,
-                    'data' => [
-                        'fleet' => request('fleet'),
-                        'seat' => request('seat'),
-                        'rates' => $scales
-                    ]
+                    'data' => $scales
                 ]);
             }
         }
