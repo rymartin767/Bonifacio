@@ -12,10 +12,14 @@ class EmployeeScalesController extends Controller
 
         if($scales) {
             if(request('fleet') && request('seat')) {
-                $scales = Airline::atlas()->scales()->select(['year', 'fleet', request('seat')])->where('fleet', request('fleet'))->get();
+                $scales = Airline::atlas()->scales()->select(['fleet', request('seat')])->where('fleet', request('fleet'))->pluck(request('seat'));
                 return response()->json([
                     'status' => 201,
-                    'data' => $scales
+                    'data' => [
+                        'fleet' => request('fleet'),
+                        'seat' => request('seat'),
+                        'rates' => $scales
+                    ]
                 ]);
             }
         }
