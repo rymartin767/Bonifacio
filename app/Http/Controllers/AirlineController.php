@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Airline;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AirlineController extends Controller
 {
@@ -30,23 +31,21 @@ class AirlineController extends Controller
 
     public function show()
     {
-        if(request('icao')) {
-            $airline = Airline::where('icao', request('icao'))->first();
-            if($airline) {
-                $json = json_decode(file_get_contents('json/airlines.json'));
-                $icao = $airline->icao;
-                return response()->json([
-                    'status' => 201,
-                    'data' => [
-                        'airline' => $airline->load('scales'),
-                        'quals' => $json->$icao->quals ?? []
-                    ]
-                ]);
-            }
+        try {
+            $airline = Airline::where('icao', request('icao'))->sole()->load('scales');
+            $json = json_decode(file_get_contents('json/airlines.json'));
+            $icao = $airline->icao;
+            return response()->json([
+                'status' => 201,
+                'data' => [
+                    'profile' => $airline,
+                    'quals' => $json->$icao->quals ?? []
+                ]
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'status' => 404
+            ]);
         }
-
-        return response()->json([
-            'status' => 404
-        ]);
     }
 }
