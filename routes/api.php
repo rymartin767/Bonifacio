@@ -26,7 +26,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/airlines', [AirlineController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/airline', [AirlineController::class, 'show'])->middleware('auth:sanctum');
-Route::get('/scales', [ScaleController::class, 'show'])->middleware('auth:sanctum');
 
 Route::get('/vacancyAwards', [VacancyController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/award', [VacancyController::class, 'show'])->middleware('auth:sanctum');
