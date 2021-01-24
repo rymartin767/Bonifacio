@@ -20,7 +20,7 @@ class Airline extends Model
 
     public static function atlas()
     {
-        return Airline::where('icao', 'GTI')->first();
+        return Airline::where('icao', 'GTI')->sole();
     }
     
     public function path($append = '')
