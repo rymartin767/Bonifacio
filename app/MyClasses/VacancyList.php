@@ -6,65 +6,79 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Seniority;
-use App\Traits\ParseTsv;
 use App\Models\Vacancy;
+use Carbon\Carbon;
+
 
 class VacancyList
 {
-    use ParseTsv;
-
-    public function __construct(string $pathToTsv)
+    public function __construct(public string $pathToFile)
     {
-        $this->pathToTsv = $pathToTsv;
     }
 
     public function month()
     {
-        return $this->parseMonth($this->pathToTsv);
+        return Carbon::parse(Str::of($this->pathToFile)->replace('_', ' ')->substr(-12, 8));
     }
 
-    protected function collectedRows(): Collection
+    public function rows(): Collection
     {
+        $content = Storage::get($this->pathToFile);
+        $rows = explode("\r\n", $content);
+
         $collection = collect();
-        $rows = $this->parseDataToRows(Storage::get($this->pathToTsv));
         foreach($rows as $row) {
-            $collection->push($this->parseRowToCollection($row));
+            $c = explode("\t", $row);
+            $c = array_filter($c);
+            $collection->put($c[1], array_values($c)); //array_values adds index to each item.... [0] => '1' (not required in this instance but used)
         }
 
         return $collection;
     }
 
-    protected function checkForNewHire($collection)
+    public function createRequests(Collection $rows)
     {
-        return $collection[1] === 'NH';
-    }
+        $requests = collect();
 
-    protected function createRequest($awardCollection, $newHire)
-    {
-        if(!$newHire) {
-            $employee = Seniority::where('emp', $awardCollection[1])->first();
-            $subset = $awardCollection->skipUntil(function ($fleet) {
-                return $fleet === '767' || $fleet === '747';
-            })->splice(0,5);
+        foreach($rows as $award) {
+            $award = collect($award);
+            $newhire = $award[1] === 'NH';
+    
+            if(!$newhire) {
+                $employee = Seniority::where('emp', $award[1])->first();
+                $subset = $award->skipUntil(function ($fleet) {
+                    return $fleet === '767' || $fleet === '747';
+                })->splice(0,5);
+            }
+
+            $request = new Request([
+                'base_seniority' => $award[0],
+                'emp' => $newhire ? 0 : $award[1],
+                'base' => $newhire ? $award[2] : $employee->domicile,
+                'fleet' => $newhire ? $award[3] : $subset[0],
+                'seat' => $newhire ? $award[4] : $subset[1],
+                'award_base' => $newhire ? $award[2] : $subset[2],
+                'award_fleet' => $newhire ? $award[3] : $subset[3],
+                'award_seat' => $newhire ? $award[4] : $subset[4],
+                'month' => $this->month()
+            ]);
+
+            $requests->push($request);
         }
 
-        $request = new Request([
-            'base_seniority' => $awardCollection[0],
-            'emp' => $newHire ? 0 : $awardCollection[1],
-            'base' => $newHire ? $awardCollection[2] : $employee->domicile,
-            'fleet' => $newHire ? $awardCollection[3] : $subset[0],
-            'seat' => $newHire ? $awardCollection[4] : $subset[1],
-            'award_base' => $newHire ? $awardCollection[2] : $subset[2],
-            'award_fleet' => $newHire ? $awardCollection[3] : $subset[3],
-            'award_seat' => $newHire ? $awardCollection[4] : $subset[4],
-            'month' => $this->month()
-        ]);
-
-        return $request;
+        return $requests;
     }
 
-    protected function validate($request)
+    public function validateRequests(Collection $requests)
+    {
+        $requests->map(fn($request) => $$this->validate($request));
+
+        return true;
+    }
+
+    public function validate($request)
     {
         $validator = Validator::make($request->all(), [
             'base_seniority' => 'required|integer',
@@ -81,60 +95,20 @@ class VacancyList
         return $validator;
     }
 
-    public function validated()
+    public function save($request)
     {
-        $validatedRequests = collect();
-        $collection = $this->collectedRows();
-        foreach($collection as $awardCollection) {
-            if($this->checkForNewHire($awardCollection)) {
-                $request = $this->createRequest($awardCollection, true);
-                $validator = $this->validate($request);
-                $errors = collect($validator->errors()->all());
-                if($errors->isEmpty()) {
-                    $validatedRequests->push($request);
-                } else {
-                    return [
-                        'status' => 'failed',
-                        'message' => $errors->first() . ' New Hire Row # ' . $awardCollection[0]
-                    ];
-                }
-            } else {
-                $request = $this->createRequest($awardCollection, false);
-                $validator = $this->validate($request);
-                $errors = collect($validator->errors()->all());
-                if($errors->isEmpty()) {
-                    $validatedRequests->push($request);
-                } else {
-                    return [
-                        'status' => 'failed',
-                        'message' => $errors->first() . ' Employee Hire Row # ' . $awardCollection[0]
-                    ];
-                }
-            }   
-        }
-        
-        return [
-            'status' => 'passed',
-            'validatedRequests' => $validatedRequests
-        ];
-    }
-
-    public function saveAwards($validatedRequests)
-    {
-        foreach($validatedRequests as $request) {
-            Vacancy::create([
-                'base_seniority' => $request->base_seniority,
-                'emp' => $request->emp,
-                'base' => $request->base,
-                'fleet' => $request->fleet,
-                'seat' => $request->seat,
-                'award_base' => $request->award_base,
-                'award_seat' => $request->award_seat,
-                'award_fleet' => $request->award_fleet,
-                'upgrade' => $request->seat === $request->award_seat ? false : true,
-                'month' => $this->month()
-            ]);
-        }
+        Vacancy::create([
+            'base_seniority' => $request->base_seniority,
+            'emp' => $request->emp,
+            'base' => $request->base,
+            'fleet' => $request->fleet,
+            'seat' => $request->seat,
+            'award_base' => $request->award_base,
+            'award_seat' => $request->award_seat,
+            'award_fleet' => $request->award_fleet,
+            'upgrade' => $request->seat === $request->award_seat ? false : true,
+            'month' => $this->month()
+        ]);
 
         return true;
     }

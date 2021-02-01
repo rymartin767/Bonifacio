@@ -24,22 +24,19 @@ class StoreVacancy extends Component
         $this->validate();
 
         $vacancy = new VacancyList($this->pathToTsv);
-
-        if($vacancy->validated()['status'] === 'passed') {
-            $saved = $vacancy->saveAwards($vacancy->validated()['validatedRequests']);
-            $saved ? $this->submitSuccess() : $this->status = 'Failed during saving!';
-        }
-
-        if($vacancy->validated()['status'] === 'failed') {
-            $this->status = $vacancy->validated()['message'];
-        }
+        $rows = $vacancy->rows();
+        $requests = $vacancy->createRequests($rows);
+        $validated = $vacancy->validateRequests($requests);
+        $validated ? 
+            $requests->map(fn($r) => $vacancy->save($r)) && $this->results('Success! Cache cleared!') : 
+            $this->results('Failed to save validated requests');  
     }
 
-    private function submitSuccess()
+    private function results(string $message)
     {
         $this->reset();
         Cache::flush();
-        $this->status = "Vacancy Awards Saved! Cache flushed.";
+        $this->status = $message;
     }
 
     public function render()
