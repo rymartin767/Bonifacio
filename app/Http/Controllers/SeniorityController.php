@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Seniority;
+use Carbon\Carbon;
 
 class SeniorityController extends Controller
 {
@@ -26,9 +27,13 @@ class SeniorityController extends Controller
 
     public function show()
     {
+        $begin = Carbon::create(request('year'))->startOfYear();
+        $end = Carbon::create(request('year'))->endOfYear();
+
         request('employee') ?
             $months = Seniority::select(['sen', 'phire', 'emp', 'doh', 'seat', 'fleet', 'domicile', 'retire', 'month'])
                 ->where('emp', request('employee'))
+                ->whereBetween('month', [$begin, $end])
                 ->get()->sortBy('month') :
             $months = collect();
         
