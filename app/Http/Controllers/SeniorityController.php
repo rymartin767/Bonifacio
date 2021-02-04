@@ -27,8 +27,13 @@ class SeniorityController extends Controller
 
     public function show()
     {
-        $begin = Carbon::create(request('year'))->startOfYear();
-        $end = Carbon::create(request('year'))->endOfYear();
+        if(request('year')) {
+            $begin = Carbon::create(request('year'))->startOfYear();
+            $end = Carbon::create(request('year'))->endOfYear();
+        } else {
+            $begin = Carbon::today()->startOfYear();
+            $end = Carbon::today()->endOfYear();
+        }
 
         request('employee') ?
             $months = Seniority::select(['sen', 'phire', 'emp', 'doh', 'seat', 'fleet', 'domicile', 'retire', 'month'])
