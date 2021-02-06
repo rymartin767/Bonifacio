@@ -32,7 +32,8 @@ class AmesController extends Controller
     public function destroy()
     {
         $id = request('id');
-        return Ame::find($id);
+        $ame = Ame::find($id);
+        return $ame;
         
 
         if($deleted) {
