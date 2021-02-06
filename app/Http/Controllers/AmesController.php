@@ -41,8 +41,7 @@ class AmesController extends Controller
     {
         $id = request('id');
         $ame = Ame::find($id);
-        return $ame;
-        
+        $deleted = $ame->delete();
 
         if($deleted) {
             return response()->json([
