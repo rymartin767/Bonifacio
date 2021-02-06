@@ -8,8 +8,6 @@ class AmesController extends Controller
 {
     public function store()
     {
-        return request()->all();
-        
         $ame = Ame::create([
             'name' => request('name'),
             'street' => request('street'),
