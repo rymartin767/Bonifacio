@@ -28,4 +28,20 @@ class AmesController extends Controller
             'status' => 404
         ]);
     }
+
+    public function destroy()
+    {
+        $id = request('id');
+        $deleted = Ame::find($id)->delete();
+
+        if($deleted) {
+            return response()->json([
+                'status' => 201
+            ]);
+        }
+
+        return response()->json([
+            'status' => 404
+        ]);
+    }
 }
