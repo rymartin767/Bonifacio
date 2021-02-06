@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AirlineController;
+use App\Http\Controllers\AmesController;
 use App\Http\Controllers\EmployeeScalesController;
 use App\Http\Controllers\MonthlyStaffingChartController;
 use App\Http\Controllers\ScaleController;
@@ -37,3 +38,5 @@ Route::get('charts/monthlyStaffing', [MonthlyStaffingChartController::class, 'sh
 
 Route::get('employeeScales', [EmployeeScalesController::class, 'index'])->middleware('auth:sanctum');
 Route::get('employeeRate', [EmployeeScalesController::class, 'show'])->middleware('auth:sanctum');
+
+Route::post('ames', [AmesController::class, 'store'])->middleware('auth:sanctum');
