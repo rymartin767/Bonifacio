@@ -29,6 +29,14 @@ class AmesController extends Controller
         ]);
     }
 
+    public function index()
+    {
+        return response()->json([
+            'status' => 201,
+            'data' => Ame::all()
+        ]);
+    }
+
     public function destroy()
     {
         $id = request('id');
