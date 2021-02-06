@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Ame;
 
 class AmesController extends Controller
 {
-    public function store(Request $request)
+    public function store()
     {
-        return $request;
-
-        $ame = Ame::create($request);
+        $ame = Ame::create([
+            'name' => request('name'),
+            'street' => request('street'),
+            'city' => request('city'),
+            'state' => request('state'),
+            'zip' => request('zip'),
+            'phone' => request('phone'),
+        ]);
 
         if($ame) {
             return response()->json([
