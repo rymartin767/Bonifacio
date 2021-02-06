@@ -40,4 +40,5 @@ Route::get('employeeScales', [EmployeeScalesController::class, 'index'])->middle
 Route::get('employeeRate', [EmployeeScalesController::class, 'show'])->middleware('auth:sanctum');
 
 Route::post('ames', [AmesController::class, 'store'])->middleware('auth:sanctum');
+Route::get('ames', [AmesController::class, 'index'])->middleware('auth:sanctum');
 Route::delete('ames', [AmesController::class, 'destroy'])->middleware('auth:sanctum');
