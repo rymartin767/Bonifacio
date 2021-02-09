@@ -7,6 +7,7 @@ use App\Http\Controllers\MonthlyStaffingChartController;
 use App\Http\Controllers\ScaleController;
 use App\Http\Controllers\SeniorityController;
 use App\Http\Controllers\VacancyController;
+use App\Http\Controllers\VerifyEmploymentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
@@ -24,6 +25,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('verifyEmployment', [VerifyEmploymentController::class, 'show'])->middleware('auth:sanctum');
 
 Route::get('/airlines', [AirlineController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/airline', [AirlineController::class, 'show'])->middleware('auth:sanctum');
