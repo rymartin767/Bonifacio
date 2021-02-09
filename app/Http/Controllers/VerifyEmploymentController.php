@@ -8,13 +8,15 @@ class VerifyEmploymentController extends Controller
 {
     public function show()
     {
-        if(request('employee')) {
-            $sen = Seniority::where('emp', request('employee'))->get()->sortBy('month')->last()->sen;
+        if(request('employee') && request('sen')) {
+            $pilot = Seniority::where('emp', request('employee'))->where('sen', request('sen'))->get()->sortBy('month')->last();
 
-            return response()->json([
-                'status' => 201,
-                'data' => $sen
-            ]);
+            if(!is_null($pilot)) {
+                return response()->json([
+                    'status' => 201,
+                    'data' => $pilot
+                ]);
+            }
         }
 
         return response()->json([
