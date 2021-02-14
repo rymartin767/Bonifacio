@@ -22,6 +22,19 @@ class IndexAirlines extends Component
         }
     }
 
+    public function toggleHiring(Airline $airline)
+    {
+        $airline->hiring = !$airline->hiring;
+        $airline->updated_at = Carbon::now();
+        $saved = $airline->save();
+        if($saved) {
+            $this->status = 'Updated!';
+        } else {
+            $this->status = 'Oops. Not updated.';
+        }
+
+    }
+
     public function render()
     {
         return view('livewire.index-airlines', [
