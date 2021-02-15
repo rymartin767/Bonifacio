@@ -9,6 +9,20 @@
             <div class="flex-1">{{ $airline->name }}</div>
             <div class="flex-1">
                 <button wire:click="toggleHiring({{$airline}})" type="button" class="p-2 {{ $airline->hiring ? 'bg-green-400' : 'bg-red-400'}} text-white rounded shadow-sm">HIRING?</button>
+                <x-modal>
+                    <x-slot name="title">Hiring URL</x-slot>
+                    <x-slot name="trigger">
+                        <x-jet-button wire:click="modalDisplayed({{$airline}})">URL</x-jet-button>
+                    </x-slot>
+                    <x-slot name="content">
+                        {{ __('Update URL') }}
+                
+                        <div class="mt-4" x-data="{}" x-on:confirming-modal-event.window="setTimeout(() => refs.url.focus(), 250)">
+                            <x-jet-input type="text" class="mt-1 block w-3/4" placeholder="{{ __('Hiring URL') }}" x-ref="url" wire:model.lazy="url"/>
+                            <x-jet-input-error for="url" class="mt-2" />
+                        </div>
+                    </x-slot>
+                </x-modal>
             </div>
             <div class="flex-1">
                 <button wire:click="updateScales({{$airline}})" type="button" class="p-2 bg-blue-500 text-white rounded shadow-sm">RESEED SCALES</button>

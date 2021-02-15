@@ -10,6 +10,10 @@ class IndexAirlines extends Component
 {
     public $status = "Waiting Patiently";
 
+    public Airline $airline;
+    public $url;
+    public $showModal = false;
+
     public function updateScales(Airline $airline)
     {
         $seeded = $airline->seedScales();
@@ -33,6 +37,26 @@ class IndexAirlines extends Component
             $this->status = 'Oops. Not updated.';
         }
 
+    }
+
+    public function modalDisplayed(Airline $airline)
+    {
+        $this->airline = $airline;
+        $this->showModal = true;
+    }
+
+    public function modalAction()
+    {
+        $airline = $this->airline;
+        $airline->url = $this->url;
+        $saved = $airline->save();
+        if($saved) {
+            $this->status = 'Updated URL';
+            $this->url = '';
+            $this->showModal = false;
+        } else {
+            $this->status = 'Oops. Not Updated.';
+        }
     }
 
     public function render()
