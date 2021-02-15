@@ -9,5 +9,7 @@ class Ame extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'name', 'street', 'city', 'state', 'zip', 'phone'
+    ];
 }
