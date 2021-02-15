@@ -1,40 +1,55 @@
 {
-    "AAL": [
-        "BOS",
-        "CLT",
-        "DCA",
-        "DFW",
-        "LAX",
-        "LGA",
-        "ORD",
-        "MIA",
-        "PHL",
-        "PHX"
-    ],
-    "AAY": [
-        "ABE",
-        "AVL",
-        "BLI",
-        "BNA",
-        "CVG",
-        "DSM",
-        "FLL",
-        "GRR",
-        "IWA",
-        "IND",
-        "LAS",
-        "LAX",
-        "PGD",
-        "PIE",
-        "PIT",
-        "SAV",
-        "SFB",
-        "TYS",
-        "VPS"
-    ],
-    "ABX": [
-        "CVG"
-    ],
+    "AAL": {
+        "hubs": [
+            "BOS",
+            "CLT",
+            "DCA",
+            "DFW",
+            "LAX",
+            "LGA",
+            "ORD",
+            "MIA",
+            "PHL",
+            "PHX"
+        ],
+        "quals": [
+
+        ]
+    },
+    "AAY": {
+        "hubs": [
+            "ABE",
+            "AVL",
+            "BLI",
+            "BNA",
+            "CVG",
+            "DSM",
+            "FLL",
+            "GRR",
+            "IWA",
+            "IND",
+            "LAS",
+            "LAX",
+            "PGD",
+            "PIE",
+            "PIT",
+            "SAV",
+            "SFB",
+            "TYS",
+            "VPS"
+        ],
+        "quals": [
+
+        ]
+    },
+    "ABX": {
+        "hubs": [
+            "CVG"
+        ],
+        "quals": [
+
+        ]
+    },
     "ASA": {
         "hubs": [
             "ANC",
@@ -62,12 +77,22 @@
             "Must be comfortable with a domicile in Seattle, WA; Los Angeles, CA; Anchorage, AK; Portland, OR; San Francisco, CA"
         ]
     },
-    "ATI": [
-        "HOME"
-    ],
-    "CKS": [
-        "HOME"
-    ],
+    "ATI": {
+        "hubs": [
+            "HOME"
+        ],
+        "quals": [
+
+        ]
+    },
+    "CKS": {
+        "hubs": [
+            "HOME"
+        ],
+        "quals": [
+
+        ]
+    },
     "DAL": {
         "hubs": [
             "ATL",
@@ -183,22 +208,46 @@
             "Must have the ability to pass a 10 year security background check and a DOT pre-employment test."
         ] 
     },
-    "JBU": [
-        "BOS",
-        "FLL",
-        "JFK",
-        "LGB",
-        "MCO"
-    ],
-    "NKS": [
-        "ACY",
-        "DFW",
-        "DTW",
-        "FLL",
-        "LAS",
-        "MCO",
-        "ORD"
-    ],
+    "JBU": {
+        "hubs": [
+            "BOS",
+            "FLL",
+            "JFK",
+            "LGB",
+            "MCO"
+        ],
+        "quals": [
+
+        ]
+    },
+    "NKS": {
+        "hubs": [
+            "ACY",
+            "DFW",
+            "DTW",
+            "FLL",
+            "LAS",
+            "MCO",
+            "ORD"
+        ],
+        "link": "https://careers.spirit.com/careers-home/jobs/3672?lang=en-us",
+        "quals": [
+            "3,000 hours total time in fixed wing aircraft.",
+            "1,000 hours in multi-engine aircraft.",
+            "Current FAA First Class Medical Certificate.",
+            "Current Unrestricted Airline Transport Pilot License.",
+            "FCC Radio Telephone Operator Permit.",
+            "Valid passport/documents with the ability to travel in and out of the USA and all cities/countries served by Spirit Airlines now and in the future.",
+            "Legal right to work in the United States.",
+            "Preferred: 4,000 hours total time in fixed wing aircraft.",
+            "Preferred: 1,500 hours in multi-engine, turboprop or jet aircraft.",
+            "Preferred: A320 Type Rating.",
+            "Preferred: Undergraduate degree from an Accredited Four-Year College or University.",
+            "Preferred: Experience in 121 airlines or turbojet aircraft.",
+            "Preferred: Experience in aircraft equipped with EFIS and/or FMS.",
+            "Preferred: Instructor/Check Airman experience."
+        ]
+    },
     "SCX": {
         "hubs": [
             "MSP"
@@ -222,30 +271,40 @@
             "See hiring page for restricted ATP Minimums"
         ]
     },
-    "SWA": [
-        "ATL",
-        "BWI",
-        "DAL",
-        "DEN",
-        "HOU",
-        "LAS",
-        "LAX",
-        "MCO",
-        "MDW",
-        "OAK",
-        "PHX"
-    ],
-    "UAL": [
-        "CLE",
-        "DEN",
-        "EWR",
-        "GUM",
-        "IAD",
-        "IAH",
-        "LAX",
-        "ORD",
-        "SFO"
-    ],
+    "SWA": {
+        "hubs": [
+            "ATL",
+            "BWI",
+            "DAL",
+            "DEN",
+            "HOU",
+            "LAS",
+            "LAX",
+            "MCO",
+            "MDW",
+            "OAK",
+            "PHX"
+        ],
+        "quals": [
+
+        ]
+    },
+    "UAL": {
+        "hubs": [
+            "CLE",
+            "DEN",
+            "EWR",
+            "GUM",
+            "IAD",
+            "IAH",
+            "LAX",
+            "ORD",
+            "SFO"
+        ],
+        "quals": [
+            
+        ]
+    },
     "UPS": {
         "hubs": [
             "ANC",
