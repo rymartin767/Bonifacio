@@ -6,7 +6,4 @@
     <div>
         UPGRADES: {{ $upgrades }}
     </div>
-    <div>
-        NEW HIRES: {{ $hires }}
-    </div>
 </div>

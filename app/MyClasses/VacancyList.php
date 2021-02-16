@@ -43,24 +43,21 @@ class VacancyList
 
         foreach($rows as $award) {
             $award = collect($award);
-            $newhire = $award[1] === 'NH';
     
-            if(!$newhire) {
-                $subset = $award->skipUntil(function ($fleet) {
-                    return $fleet === '767' || $fleet === '747';
-                })->splice(0,5);
-                $domicile = Seniority::where('emp', $award[1])->get()->sortBy('month')->last()->domicile ?? $subset[2]; //some vacancies arent on seniority list... ugh
-            }
+            $subset = $award->skipUntil(function ($fleet) {
+                return $fleet === '767' || $fleet === '747';
+            })->splice(0,5);
+            $domicile = Seniority::where('emp', $award[1])->get()->sortBy('month')->last()->domicile ?? $subset[2]; //some vacancies arent on seniority list... ugh
 
             $request = new Request([
                 'base_seniority' => $award[0],
-                'emp' => $newhire ? 0 : $award[1],
-                'base' => $newhire ? $award[2] : $domicile,
-                'fleet' => $newhire ? $award[3] : $subset[0],
-                'seat' => $newhire ? $award[4] : $subset[1],
-                'award_base' => $newhire ? $award[2] : $subset[2],
-                'award_fleet' => $newhire ? $award[3] : $subset[3],
-                'award_seat' => $newhire ? $award[4] : $subset[4],
+                'emp' => $award[1],
+                'base' => $domicile,
+                'fleet' => $subset[0],
+                'seat' => $subset[1],
+                'award_base' => $subset[2],
+                'award_fleet' => $subset[3],
+                'award_seat' => $subset[4],
                 'month' => $this->month()
             ]);
 
