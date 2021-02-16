@@ -28,7 +28,6 @@ class StoreVacancy extends Component
         $rows = $vacancy->rows();
         $requests = $vacancy->createRequests($rows);
         $validated = $vacancy->validateRequests($requests);
-        Vacancy::truncate();
         $validated ? 
             $requests->map(fn($request) => $vacancy->save($request)) && $this->results('Success! Cache cleared!') : 
             $this->results('Failed to save validated requests');  
