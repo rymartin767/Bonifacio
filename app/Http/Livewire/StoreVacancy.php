@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Vacancy;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
 use App\MyClasses\VacancyList;
@@ -27,6 +28,7 @@ class StoreVacancy extends Component
         $rows = $vacancy->rows();
         $requests = $vacancy->createRequests($rows);
         $validated = $vacancy->validateRequests($requests);
+        Vacancy::truncate();
         $validated ? 
             $requests->map(fn($request) => $vacancy->save($request)) && $this->results('Success! Cache cleared!') : 
             $this->results('Failed to save validated requests');  
