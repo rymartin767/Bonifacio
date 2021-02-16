@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 use App\Models\Seniority;
 use App\Models\Vacancy;
 use Carbon\Carbon;
-
+use Exception;
 
 class VacancyList
 {
@@ -47,7 +47,7 @@ class VacancyList
             $newhire = $award[1] === 'NH';
     
             if(!$newhire) {
-                $employee = Seniority::where('emp', $award[1])->first();
+                $domicile = Seniority::where('emp', $award[2])->first() ?? 'NH'; //some vacancies arent on seniority list... ugh
                 $subset = $award->skipUntil(function ($fleet) {
                     return $fleet === '767' || $fleet === '747';
                 })->splice(0,5);
@@ -55,8 +55,8 @@ class VacancyList
 
             $request = new Request([
                 'base_seniority' => $award[0],
-                'emp' => $newhire ? 0 : $award[1],
-                'base' => $newhire ? $award[2] : $employee->domicile,
+                'emp' => $newhire ? 0 : $award[2],
+                'base' => $newhire ? $award[2] : $domicile,
                 'fleet' => $newhire ? $award[3] : $subset[0],
                 'seat' => $newhire ? $award[4] : $subset[1],
                 'award_base' => $newhire ? $award[2] : $subset[2],
@@ -73,7 +73,7 @@ class VacancyList
 
     public function validateRequests(Collection $requests)
     {
-        $requests->map(fn($request) => $$this->validate($request));
+        $requests->map(fn($request) => $this->validate($request));
 
         return true;
     }
