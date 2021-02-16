@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 use App\Models\Seniority;
 use App\Models\Vacancy;
 use Carbon\Carbon;
-use Exception;
 
 class VacancyList
 {
@@ -32,7 +31,7 @@ class VacancyList
         foreach($rows as $row) {
             $c = explode("\t", $row);
             $c = array_filter($c);
-            $collection->put($c[1], array_values($c)); //array_values adds index to each item.... [0] => '1' (not required in this instance but used)
+            $collection->push(array_values($c)); //array_values adds index to each item.... [0] => '1' (not required in this instance but used)
         }
 
         return $collection;
