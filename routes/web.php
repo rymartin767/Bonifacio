@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\SeniorityController;
-use App\Models\Airline;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,3 +20,4 @@ Route::get('/', function () {
 Route::middleware(['verified', 'admin'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
