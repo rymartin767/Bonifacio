@@ -50,12 +50,12 @@ class VacancyList
                 $subset = $award->skipUntil(function ($fleet) {
                     return $fleet === '767' || $fleet === '747';
                 })->splice(0,5);
-                $domicile = Seniority::where('emp', $award[2])->get()->sortBy('month')->last()->domicile ?? $subset[2]; //some vacancies arent on seniority list... ugh
+                $domicile = Seniority::where('emp', $award[1])->get()->sortBy('month')->last()->domicile ?? $subset[2]; //some vacancies arent on seniority list... ugh
             }
 
             $request = new Request([
                 'base_seniority' => $award[0],
-                'emp' => $newhire ? 0 : $award[2],
+                'emp' => $newhire ? 0 : $award[1],
                 'base' => $newhire ? $award[2] : $domicile,
                 'fleet' => $newhire ? $award[3] : $subset[0],
                 'seat' => $newhire ? $award[4] : $subset[1],
