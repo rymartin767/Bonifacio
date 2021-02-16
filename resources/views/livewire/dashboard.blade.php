@@ -73,9 +73,9 @@
                     <button 
                         x-show.transition="open" 
                         class="w-full px-4 py-2 text-right text-sm font-medium text-white focus:outline-none bg-indigo-300 hover:bg-indigo-500"
-                        wire:click="$set('selected', 'store-vacancy')"
+                        wire:click="$set('selected', 'vacancy-details')"
                     >
-                    Preview December Vacancy Award
+                    Award Details
                     </button>
                 </div>
                 <div x-data="{ open:false }">
@@ -118,6 +118,10 @@
 
             @if($selected === 'store-vacancy')
                 @livewire('store-vacancy')
+            @endif
+
+            @if($selected === 'vacancy-details')
+                @livewire('vacancy-details')
             @endif
 
             @if($selected === 'index-ames')
