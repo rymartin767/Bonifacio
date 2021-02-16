@@ -52,7 +52,7 @@ class StoreSeniority extends Component
     {
         return view('livewire.store-seniority', [
             'months' => $this->savedMonths,
-            'files' => Storage::disk('s3')->allFiles('/pilots/CSV/2020')
+            'files' => Storage::disk('s3')->allFiles('/archives/seniority-lists/2021/csv')
         ]);
     }
 }
