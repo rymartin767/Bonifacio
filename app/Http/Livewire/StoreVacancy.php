@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Vacancy;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
 use App\MyClasses\VacancyList;
