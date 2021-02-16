@@ -47,10 +47,10 @@ class VacancyList
             $newhire = $award[1] === 'NH';
     
             if(!$newhire) {
-                $domicile = Seniority::where('emp', $award[2])->first() ?? 'NH'; //some vacancies arent on seniority list... ugh
                 $subset = $award->skipUntil(function ($fleet) {
                     return $fleet === '767' || $fleet === '747';
                 })->splice(0,5);
+                $domicile = Seniority::where('emp', $award[2])->get()->sortBy('month')->last()->domicile ?? $subset[2]; //some vacancies arent on seniority list... ugh
             }
 
             $request = new Request([
