@@ -14,7 +14,7 @@ class AmesController extends Controller
             'street' => 'required|string|min:5|max:50',
             'city' => 'required|string|min:2|max:50',
             'state' => ['required', Rule::in(config('general.states'))],
-            'zip' => 'required|integer|is:5',
+            'zip' => 'required|string|min:5|max:12',
             'phone' => 'required|string|min:7|max:12',
         ]);
 
