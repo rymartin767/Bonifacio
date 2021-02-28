@@ -3,35 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ame;
+use Illuminate\Validation\Rule;
 
 class AmesController extends Controller
 {
     public function store()
     {
-        $ame = Ame::create([
-            'name' => request('name'),
-            'street' => request('street'),
-            'city' => request('city'),
-            'state' => request('state'),
-            'zip' => request('zip'),
-            'phone' => request('phone'),
+        $attributes = request()->validate([
+            'name' => 'required|string|min:5|max:50',
+            'street' => 'required|string|min:5|max:50',
+            'city' => 'required|string|min:2|max:50',
+            'state' => ['required', Rule::in(config('general.states'))],
+            'zip' => 'required|integer|is:5',
+            'phone' => 'required|string|min:7|max:12',
         ]);
+
+        $ame = Ame::create($attributes);
 
         if($ame) {
-            return response()->json([
-                'status' => 201,
-                'data' => $ame
-            ]);
+            return response()->json(['data' => $ame], 201);
         }
 
-        return response()->json([
-            'status' => 404
-        ]);
+        return response()->json(['data' => 'Failed to create resource.'], 404);
     }
 
     public function index()
     {
-        // returned in data key
         $ames = Ame::when(request('state'), function ($query) {
             return $query
                 ->where('state', request('state'))
@@ -43,10 +40,7 @@ class AmesController extends Controller
                 ->get();
         });
 
-        return response()->json([
-            'status' => 201,
-            'data' => $ames
-        ]);
+        return response()->json(['data' => $ames], 200);
     }
 
     public function destroy()
