@@ -31,9 +31,21 @@ class AmesController extends Controller
 
     public function index()
     {
+        // returned in data key
+        $ames = Ame::when(request('state'), function ($query) {
+            return $query
+                ->where('state', request('state'))
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        }, function ($query) {
+            return $query
+                ->orderBy('updated_at', 'desc')
+                ->get();
+        });
+
         return response()->json([
             'status' => 201,
-            'data' => Ame::all()
+            'data' => $ames
         ]);
     }
 
