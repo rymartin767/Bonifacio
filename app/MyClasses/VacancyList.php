@@ -67,13 +67,6 @@ class VacancyList
         return $requests;
     }
 
-    public function validateRequests(Collection $requests)
-    {
-        $requests->map(fn($request) => $this->validate($request));
-
-        return true;
-    }
-
     public function validate($request)
     {
         $validator = Validator::make($request->all(), [
