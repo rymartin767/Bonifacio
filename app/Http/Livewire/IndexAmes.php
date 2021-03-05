@@ -7,13 +7,17 @@ use Livewire\Component;
 
 class IndexAmes extends Component
 {
-    public function truncateAmes()
+    public function deleteAme($id)
     {
-        Ame::truncate();
+        $ame = Ame::find($id);
+        $ame->reviews()->delete();
+        $ame->delete();
     }
 
     public function render()
     {
-        return view('livewire.index-ames');
+        return view('livewire.index-ames', [
+            'ames' => Ame::all()
+        ]);
     }
 }
