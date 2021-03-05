@@ -12,4 +12,14 @@ class Ame extends Model
     protected $fillable = [
         'name', 'street', 'city', 'state', 'zip', 'phone'
     ];
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews->pluck('rating')->average();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(AmeReview::class);
+    }
 }
