@@ -1,6 +1,6 @@
 <div class="max-w-7xl">
     <div class="text-4xl font-bold mb-8">
-        Preview Vacancy Award
+        Store Vacancy Award
     </div>
 
     <div class="max-w-lg bg-white rounded-lg overflow-hidden shadow-xl">
