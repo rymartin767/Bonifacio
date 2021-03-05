@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\AirlineController;
+use App\Http\Controllers\AmeReviewsController;
 use App\Http\Controllers\AmesController;
 use App\Http\Controllers\EmployeeScalesController;
 use App\Http\Controllers\MonthlyStaffingChartController;
-use App\Http\Controllers\ScaleController;
 use App\Http\Controllers\SeniorityController;
 use App\Http\Controllers\VacancyController;
 use App\Http\Controllers\VerifyEmploymentController;
