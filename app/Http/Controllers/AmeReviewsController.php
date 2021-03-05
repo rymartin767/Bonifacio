@@ -23,7 +23,8 @@ class AmeReviewsController extends Controller
         if($ame) {
             $review = $ame->reviews()->create([
                 'rating' => request('rating'),
-                'comment' => request('comment')
+                'comment' => request('comment'),
+                'emp_id' => request('reviewer')
             ]);
 
             return response()->json(['data' => $review], 201);
