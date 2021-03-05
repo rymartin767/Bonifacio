@@ -47,3 +47,4 @@ Route::get('ames', [AmesController::class, 'index'])->middleware('auth:sanctum')
 Route::delete('ames', [AmesController::class, 'destroy'])->middleware('auth:sanctum');
 
 Route::get('reviews', [AmeReviewsController::class, 'index'])->middleware('auth:sanctum');
+Route::post('reviews', [AmeReviewsController::class, 'store'])->middleware('auth:sanctum');
