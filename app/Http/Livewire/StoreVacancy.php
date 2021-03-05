@@ -3,7 +3,6 @@
 namespace App\Http\Livewire;
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Cache;
 use App\MyClasses\VacancyList;
 use Livewire\Component;
 
@@ -26,22 +25,17 @@ class StoreVacancy extends Component
         $vacancy = new VacancyList($this->pathToTsv);
         $rows = $vacancy->rows();
         $requests = $vacancy->createRequests($rows);
-        $validated = $vacancy->validateRequests($requests);
-        if($validated) {
-            foreach($requests as $request) {
-                $vacancy->save($request);
-            }
-            $this->results('Success! Cache cleared!');
-        } else {
-            $this->results('Failed to save validated requests');  
-        }
-    }
+        foreach($requests as $request) {
+            $validator = $vacancy->validate($request);
+            if($validator->errors()->isNotEmpty()) {
+                $this->status = 'EMP# ' . $request->all()['emp'] . ': ' . $validator->errors()->first();
+                return;
+            } 
 
-    private function results(string $message)
-    {
-        $this->reset();
-        Cache::flush();
-        $this->status = $message;
+            $vacancy->save($request);
+        }
+
+        $this->status = 'List Saved!';
     }
 
     public function render()
