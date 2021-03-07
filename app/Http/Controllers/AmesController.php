@@ -14,8 +14,8 @@ class AmesController extends Controller
             'street' => 'required|string|min:5|max:50',
             'city' => 'required|string|min:2|max:50',
             'state' => ['required', Rule::in(config('general.states'))],
-            'zip' => 'required|string|min:5|max:12',
-            'phone' => 'required|string|min:7|max:12',
+            'zip' => 'required|string|size:5',
+            'phone' => 'required|string|size:10',
         ]);
 
         $ame = Ame::create($attributes);
@@ -24,7 +24,7 @@ class AmesController extends Controller
             return response()->json(['data' => $ame], 201);
         }
 
-        return response()->json(['data' => 'Failed to create resource.'], 404);
+        return response()->json(['data' => []], 404);
     }
 
     public function index()
@@ -40,6 +40,11 @@ class AmesController extends Controller
                 ->get();
         });
 
+        foreach($ames as $ame) {
+            $ame->phone = $ame->phone;
+            $ame->rating = $ame->averageRating;
+        }
+
         return response()->json(['data' => $ames], 200);
     }
 
@@ -50,13 +55,9 @@ class AmesController extends Controller
         $deleted = $ame->delete();
 
         if($deleted) {
-            return response()->json([
-                'status' => 201
-            ]);
+            return response()->json(['data' => []], 200);
         }
 
-        return response()->json([
-            'status' => 404
-        ]);
+        return response()->json(['data' => []], 404);
     }
 }
