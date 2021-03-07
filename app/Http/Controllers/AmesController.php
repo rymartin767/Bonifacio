@@ -45,7 +45,7 @@ class AmesController extends Controller
             $ame->rating = $ame->averageRating;
         }
 
-        return response()->json(['data' => $ames], 200);
+        return response()->json(['stuff' => $ames], 200);
     }
 
     public function destroy()
