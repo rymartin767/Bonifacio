@@ -10,12 +10,21 @@ class Ame extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'street', 'city', 'state', 'zip', 'phone'
+        'name', 'street', 'city', 'state', 'zip', 'phone', 'rating'
     ];
 
-    public function getAverageRatingAttribute()
+    protected $casts = [
+        'rating' => 'decimal:1'
+    ];
+
+    public function getPhoneAttribute($value)
     {
-        return $this->reviews->pluck('rating')->average();
+        $subOne = substr($value, 0, 3);
+        $subTwo = substr($value, 3, 3);
+        $subThree = substr($value, 6, 4);
+
+        return $subOne . '-' . $subTwo . '-' . $subThree;
+
     }
 
     public function reviews()
