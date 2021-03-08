@@ -13,6 +13,16 @@ class AmeReview extends Model
         'emp_id', 'comment', 'rating'
     ];
 
+    protected static function booted()
+    {
+        static::created(function ($review) {
+            $ame = $review->ame;
+            $average = $ame->reviews->pluck('rating')->average();
+            $ame->rating = $average;
+            $ame->save();
+        });
+    }
+
     public function ame()
     {
         return $this->belongsTo(Ame::class);
