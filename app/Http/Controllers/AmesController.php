@@ -40,12 +40,7 @@ class AmesController extends Controller
                 ->get();
         });
 
-        foreach($ames as $ame) {
-            $ame->phone = $ame->phone;
-            $ame->rating = $ame->averageRating;
-        }
-
-        return response()->json(['stuff' => $ames], 200);
+        return response()->json(['data' => $ames], 200);
     }
 
     public function destroy()
