@@ -208,6 +208,14 @@
             "Must have the ability to pass a 10 year security background check and a DOT pre-employment test."
         ] 
     },
+    "HAL": {
+        "hubs": [
+            "HNL"
+        ],
+        "quals": [
+
+        ]
+    },
     "JBU": {
         "hubs": [
             "BOS",
