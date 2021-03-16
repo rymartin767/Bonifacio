@@ -23,29 +23,23 @@ class AirlineController extends Controller
                 ->get();
         });
 
-        return response()->json([
-            'status' => 201,
-            'data' => $airlines
-        ]);
+        return response()->json(['data' => $airlines], 200);
     }
 
     public function show()
     {
-        try {
-            $airline = Airline::where('icao', request('icao'))->sole()->load('scales');
+        $airline = Airline::where('icao', request('icao'))->sole()->load('scales');
+        if($airline) {
             $json = json_decode(file_get_contents('json/airlines.json'));
             $icao = $airline->icao;
             return response()->json([
-                'status' => 201,
                 'data' => [
                     'profile' => $airline,
                     'quals' => $json->$icao->quals ?? []
-                ]
-            ]);
-        } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'status' => 404
+                ], 200
             ]);
         }
+
+        return response()->json(['data' => []], 404);
     }
 }

@@ -8,43 +8,33 @@ class EmployeeScalesController extends Controller
 {
     public function index()
     {
-        $scales = Airline::atlas()->scales;
+        $atlas = Airline::atlas()->scales;
 
-        if($scales) {
-            if(request('fleet') && request('seat')) {
-                $scales = Airline::atlas()->scales()->select(['fleet', request('seat')])->where('fleet', request('fleet'))->pluck(request('seat'));
-                return response()->json([
-                    'status' => 201,
-                    'data' => $scales
-                ]);
+        if($atlas) {
+            $scales = $atlas->select(['fleet', request('seat')])->where('fleet', request('fleet'))->pluck(request('seat'));
+            if($scales) {
+                return response()->json(['data' => $scales], 200);
             }
         }
 
-        return response()->json([
-            'status' => 404
-        ]);
+        return response()->json(['data' => []], 404);
         
     }
 
     public function show()
     {
-        $scales = Airline::atlas()->scales;
+        $atlas = Airline::atlas()->scales;
 
-        if($scales) {
-            if(request('year') && request('fleet') && request('seat')) {
-                $scales = $scales->where('year', request('year'))->where('fleet', request('fleet'))->first();
-                $seat = request('seat');
-                $rate = $scales[$seat];
-                return response()->json([
-                    'status' => 201,
-                    'data' => $rate
-                ]);
-            }
+        if($atlas) {
+            $scales = $atlas->where('year', request('year'))->where('fleet', request('fleet'))->first();
+                if($scales) {
+                    $seat = request('seat');
+                    $rate = $scales[$seat];
+                    return response()->json(['data' => $rate], 200);
+                }
         }
 
-        return response()->json([
-            'status' => 404
-        ]);
+        return response()->json(['data' => []], 404);
         
     }
 }
