@@ -8,12 +8,12 @@ class EmployeeScalesController extends Controller
 {
     public function index()
     {
-        $atlas = Airline::atlas()->scales;
+        $scales = Airline::atlas()->scales;
 
-        if($atlas) {
-            $scales = $atlas->select(['fleet', request('seat')])->where('fleet', request('fleet'))->pluck(request('seat'));
-            if($scales) {
-                return response()->json(['data' => $scales], 200);
+        if($scales) {
+            $rates = $scales->where('fleet', request('fleet'))->pluck(request('seat'));
+            if($rates) {
+                return response()->json(['data' => $rates], 200);
             }
         }
 
