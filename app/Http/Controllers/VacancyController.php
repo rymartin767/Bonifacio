@@ -20,6 +20,7 @@ class VacancyController extends Controller
     public function show()
     {
         $award = Vacancy::where('emp', request('employee'))->sole();
+        
         if($award) {
             return response()->json(['data' => $award], 200);
         }
