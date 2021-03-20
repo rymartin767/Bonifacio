@@ -3,24 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Seniority;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VerifyEmploymentController extends Controller
 {
     public function show()
     {
-        if(request('employee') && request('sen')) {
-            $pilot = Seniority::where('emp', request('employee'))->where('sen', request('sen'))->get()->sortBy('month')->last();
+        $month = Seniority::pluck('month')->unique()->sort()->last();
 
-            if(!is_null($pilot)) {
-                return response()->json([
-                    'status' => 201,
-                    'data' => $pilot
-                ]);
-            }
+        try {
+            $pilot = Seniority::where('month', $month)->where('emp', request('employee'))->where('sen', request('sen'))->sole();
+            return response()->json(['data' => $pilot], 200);
+        } catch (ModelNotFoundException) {
+            return response()->json(['data' => []], 404);
         }
-
-        return response()->json([
-            'status' => 404
-        ]);
     }
 }
