@@ -15,7 +15,7 @@ class SeniorityController extends Controller
         
         if($list->isNotEmpty()) {
             return response()->json([
-                'status' => 201,
+                'status' => 200,
                 'data' => $list
             ]);
         }
@@ -44,7 +44,7 @@ class SeniorityController extends Controller
         
         if($months->isNotEmpty()) {
             return response()->json([
-                'status' => 201,
+                'status' => 200,
                 'data' => $months
             ]);
         }
