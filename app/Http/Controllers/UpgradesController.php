@@ -11,10 +11,7 @@ class UpgradesController extends Controller
         $upgrades = Vacancy::where('upgrade', 1)->get()->groupBy('award_fleet');
 
         if($upgrades->isNotEmpty()) {
-            return response()->json([
-                'status' => 200,
-                'data' => $upgrades
-            ]);
+            return response()->json(['data' => $upgrades], 200);
         }
     
         return response()->json([
