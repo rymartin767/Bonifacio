@@ -3,6 +3,7 @@
 use App\Http\Controllers\AirlineController;
 use App\Http\Controllers\AmeReviewsController;
 use App\Http\Controllers\AmesController;
+use App\Http\Controllers\AtlasPayRatesController;
 use App\Http\Controllers\DomicilesController;
 use App\Http\Controllers\EmployeeScalesController;
 use App\Http\Controllers\MonthlyStaffingChartController;
@@ -32,6 +33,7 @@ Route::get('verifyEmployment', [VerifyEmploymentController::class, 'show'])->mid
 
 Route::get('/airlines', [AirlineController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/airline', [AirlineController::class, 'show'])->middleware('auth:sanctum');
+Route::get('atlasPayRates', AtlasPayRatesController::class)->middleware('auth:sanctum');
 
 Route::get('/vacancyAwards', [VacancyController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/award', [VacancyController::class, 'show'])->middleware('auth:sanctum');
