@@ -6,7 +6,7 @@ use App\Models\Seniority;
 
 class MonthlyStaffingChartController extends Controller
 {
-    public function show()
+    public function __invoke()
     {
         $months = Seniority::pluck('month')->unique()->sort()->take(-12);
 
