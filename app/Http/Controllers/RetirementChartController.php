@@ -16,7 +16,7 @@ class RetirementChartController extends Controller
         try {
             $collection = $current_list->groupBy(function ($item, $key) {
                 return Carbon::parse($item['retire'])->format('Y');
-            })->map->count();
+            })->map->count()->sortKeys();
             
             return response()->json(['data' => $collection->all()], 200);
         } catch(Exception $e) {
