@@ -7,6 +7,7 @@ use App\Http\Controllers\AtlasPayRatesController;
 use App\Http\Controllers\DomicilesController;
 use App\Http\Controllers\EmployeeScalesController;
 use App\Http\Controllers\MonthlyStaffingChartController;
+use App\Http\Controllers\RetirementChartController;
 use App\Http\Controllers\SeniorityController;
 use App\Http\Controllers\UpgradesController;
 use App\Http\Controllers\VacancyController;
@@ -40,11 +41,11 @@ Route::get('/award', [VacancyController::class, 'show'])->middleware('auth:sanct
 
 Route::get('upgrades', [UpgradesController::class, 'index'])->middleware('auth:sanctum');
 
-Route::get('/seniorities', [SeniorityController::class, 'show'])->middleware('auth:sanctum');
-Route::get('/seniorityList', [SeniorityController::class, 'index'])->middleware('auth:sanctum');
+// Seniority List Family
+Route::get('seniorities', [SeniorityController::class, 'show'])->middleware('auth:sanctum');
+Route::get('seniorityList', [SeniorityController::class, 'index'])->middleware('auth:sanctum');
 
 Route::get('charts/monthlyStaffing', [MonthlyStaffingChartController::class, 'show'])->middleware('auth:sanctum');
-Route::get('monthlyStaffing', [MonthlyStaffingChartController::class, 'show'])->middleware('auth:sanctum');
 
 Route::get('employeeScales', [EmployeeScalesController::class, 'index'])->middleware('auth:sanctum');
 Route::get('employeeRate', [EmployeeScalesController::class, 'show'])->middleware('auth:sanctum');
@@ -58,3 +59,7 @@ Route::post('reviews', [AmeReviewsController::class, 'store'])->middleware('auth
 
 Route::get('domiciles', [DomicilesController::class, 'index'])->middleware('auth:sanctum');
 Route::get('domicile', [DomicilesController::class, 'show'])->middleware('auth:sanctum');
+
+// Apex Charts
+Route::get('monthlyStaffingChart', MonthlyStaffingChartController::class)->middleware('auth:sanctum');
+Route::get('retirementChart', RetirementChartController::class)->middleware('auth:sanctum');
