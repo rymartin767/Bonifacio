@@ -4,6 +4,7 @@ use App\Http\Controllers\AirlineController;
 use App\Http\Controllers\AmeReviewsController;
 use App\Http\Controllers\AmesController;
 use App\Http\Controllers\AtlasPayRatesController;
+use App\Http\Controllers\AwardsController;
 use App\Http\Controllers\DomicilesController;
 use App\Http\Controllers\EmployeeScalesController;
 use App\Http\Controllers\MonthlyStaffingChartController;
@@ -38,6 +39,7 @@ Route::get('atlasPayRates', AtlasPayRatesController::class)->middleware('auth:sa
 
 Route::get('/vacancyAwards', [VacancyController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/award', [VacancyController::class, 'show'])->middleware('auth:sanctum');
+Route::get('awards', AwardsController::class)->middleware(['auth:sanctum']);
 
 Route::get('upgrades', [UpgradesController::class, 'index'])->middleware('auth:sanctum');
 
