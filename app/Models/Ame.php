@@ -19,11 +19,11 @@ class Ame extends Model
 
     public function getPhoneAttribute($value)
     {
-        $subOne = substr($value, 0, 3);
-        $subTwo = substr($value, 3, 3);
-        $subThree = substr($value, 6, 4);
+        // $subOne = substr($value, 0, 3);
+        // $subTwo = substr($value, 3, 3);
+        // $subThree = substr($value, 6, 4);
 
-        return $subOne . '-' . $subTwo . '-' . $subThree;
+        // return $subOne . '-' . $subTwo . '-' . $subThree;
 
     }
 
