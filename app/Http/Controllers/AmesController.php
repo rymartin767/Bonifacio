@@ -10,12 +10,12 @@ class AmesController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'name' => 'required|string|min:5|max:50',
-            'street' => 'required|string|min:5|max:50',
-            'city' => 'required|string|min:2|max:50',
-            'state' => ['required', Rule::in(config('general.states'))],
-            'zip' => 'required|string|size:5',
-            'phone' => 'required|string|size:10',
+            'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/'],
+            'street' => ['required', 'string', 'min:5', 'max:50'],
+            'city' => ['required', 'string', 'min:2', 'max:75'],
+            'state' => ['required', Rule::in($this->states)],
+            'zip' => ['required', 'numeric', 'digits:5'],
+            'phone' => ['required', 'regex:/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'],
         ]);
 
         $ame = Ame::create($attributes);
@@ -50,7 +50,7 @@ class AmesController extends Controller
         $deleted = $ame->delete();
 
         if($deleted) {
-            return response()->json(['data' => []], 200);
+            return response()->json(['data' => []], 201);
         }
 
         return response()->json(['data' => []], 404);
