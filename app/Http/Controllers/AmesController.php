@@ -10,22 +10,18 @@ class AmesController extends Controller
 {
     public function store()
     {
-        try {
-            $attributes = request()->validate([
-                'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/'],
-                'street' => ['required', 'string', 'min:5', 'max:50'],
-                'city' => ['required', 'string', 'min:2', 'max:75'],
-                'state' => ['required', Rule::in(config('general.states'))],
-                'zip' => ['required', 'numeric', 'digits:5'],
-                'phone' => ['required', 'regex:/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'],
-            ]);
+        $attributes = request()->validate([
+            'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/'],
+            'street' => ['required', 'string', 'min:5', 'max:50'],
+            'city' => ['required', 'string', 'min:2', 'max:75'],
+            'state' => ['required', Rule::in(config('general.states'))],
+            'zip' => ['required', 'numeric', 'digits:5'],
+            'phone' => ['required', 'regex:/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'],
+        ]);
 
-            $ame = Ame::create($attributes);
-            
-            return response()->json(['data' => $ame], 201);
-        } catch (Exception $e) {
-            return response()->json(['data' => [$e->getMessage()]], 422);
-        }
+        $ame = Ame::create($attributes);
+        
+        return response()->json(['data' => $ame], 201);
     }
 
     public function index()
@@ -49,9 +45,9 @@ class AmesController extends Controller
         $ame = Ame::destroy($id);
 
         if($ame) {
-            return response()->json(['data' => []], 200);
+            return response()->json(['data' => ['Success']], 200);
         }
 
-        return response()->json(['data' => []], 404);
+        return response()->json(['data' => ['Failed. Could not find record to destroy by provided id']], 404);
     }
 }
