@@ -17,15 +17,15 @@ class Ame extends Model
         'rating' => 'decimal:1'
     ];
 
-    public function getPhoneAttribute($value)
-    {
-        // $subOne = substr($value, 0, 3);
-        // $subTwo = substr($value, 3, 3);
-        // $subThree = substr($value, 6, 4);
+    // public function getPhoneAttribute($value)
+    // {
+    //     $subOne = substr($value, 0, 3);
+    //     $subTwo = substr($value, 3, 3);
+    //     $subThree = substr($value, 6, 4);
 
-        // return $subOne . '-' . $subTwo . '-' . $subThree;
+    //     return $subOne . '-' . $subTwo . '-' . $subThree;
 
-    }
+    // }
 
     public function reviews()
     {
