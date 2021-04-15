@@ -2,26 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Validation\Rule;
 use App\Models\Ame;
 use Exception;
-use Illuminate\Validation\Rule;
 
 class AmesController extends Controller
 {
     public function store()
     {
-        $attributes = request()->validate([
-            'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/'],
-            'street' => ['required', 'string', 'min:5', 'max:50'],
-            'city' => ['required', 'string', 'min:2', 'max:75'],
-            'state' => ['required', Rule::in(config('general.states'))],
-            'zip' => ['required', 'numeric', 'digits:5'],
-            'phone' => ['required', 'regex:/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'],
-        ]);
+        try {
+            $attributes = request()->validate([
+                'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/'],
+                'street' => ['required', 'string', 'min:5', 'max:50'],
+                'city' => ['required', 'string', 'min:2', 'max:75'],
+                'state' => ['required', Rule::in(config('general.states'))],
+                'zip' => ['required', 'numeric', 'digits:5'],
+                'phone' => ['required', 'regex:/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'],
+            ]);
 
-        $ame = Ame::create($attributes);
-        
-        return response()->json(['data' => $ame], 201);
+            $ame = Ame::create($attributes);
+            
+            return response()->json(['data' => $ame], 201);
+        } catch (Exception $e) {
+            return response()->json(['data' => [$e->getMessage()]], 422);
+        }
     }
 
     public function index()
