@@ -3,35 +3,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ame;
+use Exception;
 use Illuminate\Validation\Rule;
 
 class AmesController extends Controller
 {
     public function store()
     {
-        $attributes = request()->validate([
-            'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/'],
-            'street' => ['required', 'string', 'min:5', 'max:50'],
-            'city' => ['required', 'string', 'min:2', 'max:75'],
-            'state' => ['required', Rule::in(
-                [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 
-                    'FL', 'GA', 'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 
-                    'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 
-                    'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 
-                    'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VI', 'VA', 
-                    'WA', 'WV', 'WI', 'WY' ]
-            )],
-            'zip' => ['required', 'numeric', 'digits:5'],
-            'phone' => ['required', 'regex:/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'],
-        ]);
+        try {
+            $attributes = request()->validate([
+                'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/'],
+                'street' => ['required', 'string', 'min:5', 'max:50'],
+                'city' => ['required', 'string', 'min:2', 'max:75'],
+                'state' => ['required', Rule::in(config('general.states'))],
+                'zip' => ['required', 'numeric', 'digits:5'],
+                'phone' => ['required', 'regex:/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'],
+            ]);
 
-        $ame = Ame::create($attributes);
-
-        if($ame) {
+            $ame = Ame::create($attributes);
+            
             return response()->json(['data' => $ame], 201);
+        } catch (Exception $e) {
+            return response()->json(['data' => [$e->getMessage()]], 422);
         }
-
-        return response()->json(['data' => []], 404);
     }
 
     public function index()
@@ -50,14 +44,12 @@ class AmesController extends Controller
         return response()->json(['data' => $ames], 200);
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        $id = request('id');
-        $ame = Ame::find($id);
-        $deleted = $ame->delete();
+        $ame = Ame::destroy($id);
 
-        if($deleted) {
-            return response()->json(['data' => []], 201);
+        if($ame) {
+            return response()->json(['data' => []], 200);
         }
 
         return response()->json(['data' => []], 404);
