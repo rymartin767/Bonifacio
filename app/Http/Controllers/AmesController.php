@@ -49,9 +49,9 @@ class AmesController extends Controller
         $ame = Ame::destroy($id);
 
         if($ame) {
-            return response()->json(['data' => ['Success']], 200);
+            return response()->json(['data' => ['Success!']], 200);
         }
 
-        return response()->json(['data' => ['Failed. Could not find record to destroy by provided id']], 404);
+        return response()->json(['data' => ['Failed! Bad id provided.']], 404);
     }
 }
