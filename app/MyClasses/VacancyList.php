@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use App\Models\Seniority;
 use App\Models\Vacancy;
 use Carbon\Carbon;
 
@@ -44,20 +43,20 @@ class VacancyList
         foreach($rows as $award) {
             $award = collect($award);
     
-            $subset = $award->skipUntil(function ($fleet) {
-                return $fleet === '767' || $fleet === '747';
+            // find the first instance of a domicile (which is the current base) and return 6 values 
+            $subset = $award->skipUntil(function ($domicile) {
+                return $domicile === 'ANC' || $domicile === 'CVG' || $domicile === 'JFK' || $domicile === 'LAX' || $domicile === 'MIA' || $domicile === 'ONT' || $domicile === 'ORD';
             })->splice(0,5);
-            $domicile = Seniority::where('emp', $award[1])->get()->sortBy('month')->last()->domicile ?? $subset[2]; //some vacancies arent on seniority list... ugh
-
+            
             $request = new Request([
                 'base_seniority' => $award[0],
                 'emp' => $award[1],
-                'base' => $domicile,
-                'fleet' => $subset[0],
-                'seat' => $subset[1],
-                'award_base' => $subset[2],
-                'award_fleet' => $subset[3],
-                'award_seat' => $subset[4],
+                'base' => $subset[0],
+                'fleet' => $subset[1],
+                'seat' => $subset[2],
+                'award_base' => $subset[3],
+                'award_fleet' => $subset[4],
+                'award_seat' => $subset[5],
                 'month' => $this->month()
             ]);
 
