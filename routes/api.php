@@ -51,7 +51,7 @@ Route::get('upgrades', [UpgradesController::class, 'index'])->middleware('auth:s
 Route::get('seniorities', [SeniorityController::class, 'show'])->middleware('auth:sanctum');
 Route::get('seniorityList', [SeniorityController::class, 'index'])->middleware('auth:sanctum');
 
-Route::get('charts/monthlyStaffing', [MonthlyStaffingChartController::class, 'show'])->middleware('auth:sanctum');
+Route::get('charts/monthlyStaffing', MonthlyStaffingChartController::class)->middleware('auth:sanctum');
 
 Route::get('employeeScales', [EmployeeScalesController::class, 'index'])->middleware('auth:sanctum');
 Route::get('employeeRate', [EmployeeScalesController::class, 'show'])->middleware('auth:sanctum');
