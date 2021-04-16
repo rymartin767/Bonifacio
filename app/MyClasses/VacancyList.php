@@ -46,7 +46,7 @@ class VacancyList
             // find the first instance of a domicile (which is the current base) and return 6 values 
             $subset = $award->skipUntil(function ($domicile) {
                 return $domicile === 'ANC' || $domicile === 'CVG' || $domicile === 'JFK' || $domicile === 'LAX' || $domicile === 'MIA' || $domicile === 'ONT' || $domicile === 'ORD';
-            })->splice(0,5);
+            })->splice(0,6);
             
             $request = new Request([
                 'base_seniority' => $award[0],
