@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('verifyEmployment', [VerifyEmploymentController::class, 'show'])->middleware('auth:sanctum');
+Route::get('verifyEmployment', VerifyEmploymentController::class)->middleware('auth:sanctum');
 
 Route::get('/airlines', [AirlineController::class, 'index'])->middleware('auth:sanctum');
 Route::get('/airline', [AirlineController::class, 'show'])->middleware('auth:sanctum');
