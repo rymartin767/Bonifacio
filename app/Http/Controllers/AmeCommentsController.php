@@ -5,14 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Ame;
 use Exception;
 
-class AmeReviewsController extends Controller
+class AmeCommentsController extends Controller
 {
     public function index()
     {
         $ame = Ame::find(request('ame'));
         if($ame) {
-            $reviews = $ame->reviews;
-            return response()->json(['data' => $reviews], 200);
+            $comments = $ame->comments;
+            return response()->json(['data' => $comments], 200);
         }
 
         return response()->json(['data' => []], 404);
@@ -23,14 +23,13 @@ class AmeReviewsController extends Controller
         $ame = Ame::find(request('ame'));
         if($ame) {
             try {
-                $review = $ame->reviews()->create([
-                    'rating' => request('rating'),
+                $review = $ame->comments()->create([
                     'comment' => request('comment'),
-                    'emp_id' => request('reviewer')
+                    'user_id' => request('user')
                 ]);
 
                 return response()->json(['data' => $review], 201);
-            } catch (Exception $e) {
+            } catch (Exception) {
                 return response()->json(['data' => []], 400); // code 400 is a bad request
             }
         }

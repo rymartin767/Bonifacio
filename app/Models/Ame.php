@@ -17,6 +17,8 @@ class Ame extends Model
         'rating' => 'decimal:1'
     ];
 
+    protected $withCount = ['comments'];
+
     // public function getPhoneAttribute($value)
     // {
     //     $subOne = substr($value, 0, 3);
@@ -27,8 +29,8 @@ class Ame extends Model
 
     // }
 
-    public function reviews()
+    public function comments()
     {
-        return $this->hasMany(AmeReview::class);
+        return $this->hasMany(AmeComment::class);
     }
 }

@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\AmeReview;
+use App\Models\Ame;
+use App\Models\AmeComment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AmeReviewFactory extends Factory
+class AmeCommentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = AmeReview::class;
+    protected $model = AmeComment::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +23,9 @@ class AmeReviewFactory extends Factory
     public function definition()
     {
         return [
-            'ame_id' => 1,
-            'emp_id' => rand(1, 10),
-            'comment' => $this->faker->sentence(),
-            'rating' => rand(1, 5)
+            'ame_id' => Ame::factory(),
+            'user_id' => rand(1, 2000),
+            'comment' => $this->faker->sentence()
         ];
     }
 }

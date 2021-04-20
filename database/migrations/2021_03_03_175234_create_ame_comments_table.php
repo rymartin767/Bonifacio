@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAmeReviewsTable extends Migration
+class CreateAmeCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateAmeReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ame_reviews', function (Blueprint $table) {
+        Schema::create('ame_comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ame_id')->references('id')->on('ames');
-            $table->unsignedBigInteger('emp_id');
+            $table->foreignId('ame_id')->constrained();
+            $table->unsignedBigInteger('user_id');
             $table->text('comment');
-            $table->smallInteger('rating');
             $table->timestamps();
         });
     }

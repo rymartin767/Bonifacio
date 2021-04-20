@@ -4,21 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
-class AmeReview extends Model
+class AmeComment extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'emp_id', 'comment', 'rating'
+        'user_id', 'comment'
     ];
 
     protected static function booted()
     {
-        static::created(function ($review) {
-            $ame = $review->ame;
-            $average = $ame->reviews->pluck('rating')->average();
-            $ame->rating = $average;
+        static::created(function ($comment) {
+            $ame = $comment->ame;
+            $ame->updated_at = Carbon::now();
             $ame->save();
         });
     }

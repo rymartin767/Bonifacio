@@ -22,12 +22,12 @@ class AmeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => 'Dr. John Capurro',
-            'street' => '123 University Blvd',
-            'city' => 'Cincinnati',
-            'state' => 'Ohio',
-            'zip' => '44444',
-            'phone' => '4449098765'
+            'name' => $this->faker->name,
+            'street' => $this->faker->streetName,
+            'city' => $this->faker->city,
+            'state' => 'OH',
+            'zip' => $this->faker->postcode,
+            'phone' => $this->faker->phoneNumber
         ];
     }
 }
