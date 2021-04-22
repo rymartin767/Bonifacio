@@ -32,11 +32,13 @@ class AmesController extends Controller
     {
         $ames = Ame::when(request('state'), function ($query) {
             return $query
+                ->where('name', 'like', '%' . request('search') . '%')
                 ->where('state', request('state'))
                 ->orderBy('updated_at', 'desc')
                 ->get();
         }, function ($query) {
             return $query
+                ->where('name', 'like', '%' . request('search') . '%')
                 ->orderBy('updated_at', 'desc')
                 ->get();
         });
