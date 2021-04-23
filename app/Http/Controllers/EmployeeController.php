@@ -18,39 +18,54 @@ class EmployeeController extends Controller
             // Current + Award Stats
             $award = Vacancy::where('emp', request('number'))->sole();
             if ($award) {
-                $collection->put('base_seniority', $award->base_seniority);
-                $collection->put('base', $award->base);
-                $collection->put('seat', $award->seat);
-                $collection->put('fleet', $award->fleet);
-                $collection->put('award_base', $award->award_base);
-                $collection->put('award_seat', $award->award_seat);
-                $collection->put('award_fleet', $award->award_fleet);
-                $collection->put('upgrade', $award->upgrade);
+                // Current
+                $collection->put('current', [
+                    'base' => $award->base,
+                    'seat' => $award->seat,
+                    'fleet' => $award->fleet
+                ]);
+                // Award
+                $collection->put('award', [
+                    'award_base' =>  $award->award_base,
+                    'award_seat' =>  $award->award_seat,
+                    'award_fleet' =>  $award->award_fleet,
+                    'upgrade' =>  $award->upgrade
+                ]);
             }
 
             // Seniority History
-            $history = Seniority::select(['sen', 'emp', 'doh', 'retire', 'seat', 'fleet', 'domicile', 'month'])->where('emp', request('number'))->get()->sortBy('month');
-            if ($history) {
-                $collection->put('history', $history);
-                $collection->put('doh', $history->first()->doh);
-                $collection->put('retire', $history->first()->retire);
+            $months = Seniority::select(['sen', 'emp', 'doh', 'retire', 'seat', 'fleet', 'domicile', 'month'])->where('emp', request('number'))->get()->sortBy('month');
+            if ($months) {
+                $service_in_months = date_diff(Carbon::now(), Carbon::create($months->first()->doh))->format('%y YRS + %m MOS');
+                $service_in_years = Carbon::now()->diffInYears($this->doh) + 1;
+                $collection->put('history', [
+                    'doh' => $months->first()->doh,
+                    'months' => $months,
+                    'retire' => $months->first()->retire,
+                    'service_in_years' => $service_in_years,
+                    'service_in_months' => $service_in_months
+                ]);
             }
 
-            // Fleet Rates
+            // Compensation
             $scales = Airline::atlas()->scales->where('fleet', $award['fleet'])->pluck(Str::of($award['seat'])->lower());
             if ($scales) {
-                $collection->put('rates', $scales);
-
                 // Employee Rate
                 $doh = Seniority::where('emp', request('number'))->first()->doh;
                 $years = Carbon::now()->diffInYears($doh);
                 $rate = $scales[$years];
-                $collection->put('rate', $rate);
 
                 // Guarantee
                 $hours = $years > 0 ? 62 : 50;
-                $collection->put('guarantee_hours', $hours);
-                $collection->put('guarantee_salary', number_format($hours*intval($rate)), 2);
+                $salary = number_format(($hours*intval($rate)), 2);
+
+                // Return
+                $collection->put('compensation', [
+                    'rates' => $scales,
+                    'rate' => $rate,
+                    'guarantee_hours' => $hours,
+                    'guarantee_salary' => $salary
+                ]);
             }
 
             if($collection->isNotEmpty()) {
