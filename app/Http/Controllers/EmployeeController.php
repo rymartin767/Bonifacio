@@ -21,16 +21,16 @@ class EmployeeController extends Controller
         
             if ($award) {
                 // Current
-                $collection->put('current', [
+                $collection->put('currentPosition', [
                     'base' => $award->base,
                     'seat' => $award->seat,
                     'fleet' => $award->fleet
                 ]);
                 // Award
-                $collection->put('award', [
-                    'award_base' =>  $award->award_base,
-                    'award_seat' =>  $award->award_seat,
-                    'award_fleet' =>  $award->award_fleet,
+                $collection->put('awardPosition', [
+                    'awardBase' =>  $award->award_base,
+                    'awardSeat' =>  $award->award_seat,
+                    'awardFleet' =>  $award->award_fleet,
                     'upgrade' =>  $award->upgrade
                 ]);
             }
@@ -44,8 +44,8 @@ class EmployeeController extends Controller
                     'doh' => $months->first()->doh,
                     'months' => $months,
                     'retire' => $months->first()->retire,
-                    'service_in_years' => $service_in_years,
-                    'service_in_months' => $service_in_months
+                    'serviceInYears' => $service_in_years,
+                    'serviceInMonths' => $service_in_months
                 ]);
             }
     
@@ -65,8 +65,8 @@ class EmployeeController extends Controller
                 $collection->put('compensation', [
                     'rates' => $scales,
                     'rate' => $rate,
-                    'guarantee_hours' => $hours,
-                    'guarantee_salary' => $salary
+                    'guaranteeHours' => $hours,
+                    'guaranteeSalary' => $salary
                 ]);
             }
     
