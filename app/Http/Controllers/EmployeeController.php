@@ -28,9 +28,9 @@ class EmployeeController extends Controller
                 ]);
                 // Award
                 $collection->put('awardPosition', [
-                    'awardBase' =>  $award->award_base,
-                    'awardSeat' =>  $award->award_seat,
-                    'awardFleet' =>  $award->award_fleet,
+                    'base' =>  $award->award_base,
+                    'seat' =>  $award->award_seat,
+                    'fleet' =>  $award->award_fleet,
                     'upgrade' =>  $award->upgrade
                 ]);
             }
