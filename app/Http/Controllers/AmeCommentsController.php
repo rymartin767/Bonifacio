@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ame;
 use Exception;
+use Illuminate\Validation\ValidationException;
 
 class AmeCommentsController extends Controller
 {
@@ -20,18 +21,21 @@ class AmeCommentsController extends Controller
 
     public function store()
     {
-        $ame = Ame::find(request('ame'));
+        $ame = Ame::find(request('ame_id'));
+
         if($ame) {
             try {
-                $review = $ame->comments()->create([
-                    'comment' => request('comment'),
-                    'user_id' => request('user')
+                $attributes = request()->validate([
+                    'user_id' => ['required', 'numeric'],
+                    'body' => ['required', 'string', 'min:5', 'max:999']
                 ]);
-
-                return response()->json(['data' => $review], 201);
-            } catch (Exception) {
-                return response()->json(['data' => []], 400); // code 400 is a bad request
+            } catch (ValidationException) {
+                return response()->json(['data' => []], 422);
             }
+
+            $ame->comments()->create($attributes);
+            
+            return response()->json(['data' => $ame], 201);
         }
 
         return response()->json(['data' => []], 404);
