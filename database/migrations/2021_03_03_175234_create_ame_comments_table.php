@@ -17,7 +17,7 @@ class CreateAmeCommentsTable extends Migration
             $table->id();
             $table->foreignId('ame_id')->constrained();
             $table->unsignedBigInteger('user_id');
-            $table->text('comment');
+            $table->text('body');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateAmeCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ame_reviews');
+        Schema::dropIfExists('ame_comments');
     }
 }
