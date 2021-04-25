@@ -46,6 +46,19 @@ class AmesController extends Controller
         return response()->json(['data' => $ames], 200);
     }
 
+    public function show($id)
+    {
+        $ame = Ame::find($id);
+
+        if($ame) {
+            $ame = $ame->load('comments');
+
+            return response()->json(['data' => $ame], 200);
+        }
+
+        return response()->json(['data' => ['Model Not Found (You should be excepted, but are not']], 404);
+    }
+
     public function destroy($id)
     {
         $ame = Ame::destroy($id);
@@ -54,6 +67,6 @@ class AmesController extends Controller
             return response()->json(['data' => ['Success!']], 200);
         }
 
-        return response()->json(['data' => ['Failed! Bad id provided.']], 404);
+        return response()->json(['data' => ['Model Not Found (You should be excepted, but are not']], 404);
     }
 }
