@@ -25,7 +25,7 @@ class AmeCommentFactory extends Factory
         return [
             'ame_id' => Ame::factory(),
             'user_id' => rand(1, 2000),
-            'comment' => $this->faker->sentence()
+            'body' => $this->faker->sentence()
         ];
     }
 }
