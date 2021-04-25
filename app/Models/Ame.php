@@ -33,4 +33,10 @@ class Ame extends Model
     {
         return $this->hasMany(AmeComment::class);
     }
+
+    public function ratings()
+    {
+    return $this->hasMany(AmeRating::class);
+    }
+    
 }
