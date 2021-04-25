@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AirlineController;
+use App\Http\Controllers\AmeCommentsController;
 use App\Http\Controllers\AmeReviewsController;
 use App\Http\Controllers\AmesController;
 use App\Http\Controllers\AtlasPayRatesController;
@@ -62,6 +63,8 @@ Route::delete('ames/{id}', [AmesController::class, 'destroy'])->middleware('auth
 
 Route::get('reviews', [AmeReviewsController::class, 'index'])->middleware('auth:sanctum');
 Route::post('reviews', [AmeReviewsController::class, 'store'])->middleware('auth:sanctum');
+
+Route::post('ameComments', [AmeCommentsController::class, 'store']);
 
 Route::get('domiciles', [DomicilesController::class, 'index'])->middleware('auth:sanctum');
 Route::get('domicile', [DomicilesController::class, 'show'])->middleware('auth:sanctum');
