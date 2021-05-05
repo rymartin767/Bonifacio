@@ -7,23 +7,21 @@ use Illuminate\Validation\ValidationException;
 
 class AmeCommentsController extends Controller
 {
-    public function store()
+    public function store($id)
     {
-        $ame = Ame::find(request('ame_id'));
-
-        if($ame) {
-            try {
-                $attributes = request()->validate([
-                    'user_id' => ['required', 'numeric'],
-                    'body' => ['required', 'string', 'min:5', 'max:999']
-                ]);
-            } catch (ValidationException) {
-                return response()->json(['data' => []], 422);
-            }
-
-            $ame->comments()->create($attributes);
+        try {
+            $attributes = request()->validate([
+                'user_id' => ['required', 'numeric'],
+                'comment' => ['required', 'string', 'min:5', 'max:999']
+            ]);
+        } catch (ValidationException) {
+            return response()->json(['data' => []], 422);
+        }
             
-            return response()->json(['data' => $ame], 201);
+        $ame = Ame::find($id);
+        if($ame) {
+            $ame->comments()->create($attributes);
+            return response()->json(['data' => 'success'], 201);
         }
 
         return response()->json(['data' => []], 404);
