@@ -12,7 +12,7 @@ class AmeCommentsController extends Controller
         try {
             $attributes = request()->validate([
                 'user_id' => ['required', 'numeric'],
-                'comment' => ['required', 'string', 'min:5', 'max:999']
+                'body' => ['required', 'string', 'min:5', 'max:999']
             ]);
         } catch (ValidationException) {
             return response()->json(['data' => []], 422);
