@@ -24,7 +24,7 @@ class AmeCommentsTest extends TestCase
     {
         $this->asSanctum();
 
-        $response = $this->postJson('/api/ames/1/comments', ['user_id' => 1, 'body' => 'Testing the ames comments api']);
+        $response = $this->post('/api/ames/1/comments', ['user_id' => 1, 'body' => 'Testing the ames comments api']);
         $response->assertExactJson(['data' => ['AME Model Not Found!']], 422);
     }
 
@@ -32,7 +32,7 @@ class AmeCommentsTest extends TestCase
     {
         $this->asSanctum();
 
-        $response = $this->postJson('/api/ames/1/comments', ['user_id' => 1, 'body' => 'api']);
+        $response = $this->post('/api/ames/1/comments', ['user_id' => 1, 'body' => 'api']);
         $response->assertExactJson(['data' => ["The given data was invalid."]], 422);
     }
 
@@ -40,9 +40,12 @@ class AmeCommentsTest extends TestCase
     {
         $this->asSanctum();
 
-        Ame::factory()->create();
+        $ame = Ame::factory()->create();
 
-        $response = $this->postJson('/api/ames/1/comments', ['user_id' => 1, 'body' => 'Testing the ames comments api']);
+        $response = $this->post('/api/ames/1/comments', ['user_id' => 1, 'body' => 'Testing the ames comments api']);
         $response->assertExactJson(['data' => ['success']], 201);
+
+        $this->assertDatabaseHas('ame_comments', ['id' => 1, 'user_id' => 1]);
+        $this->assertCount(1, $ame->comments);
     }
 }
