@@ -14,8 +14,8 @@ class AmeCommentsController extends Controller
                 'user_id' => ['required', 'numeric'],
                 'body' => ['required', 'string', 'min:5', 'max:999']
             ]);
-        } catch (ValidationException) {
-            return response()->json(['data' => []], 422);
+        } catch (ValidationException $e) {
+            return response()->json(['data' => [$e]], 422);
         }
             
         $ame = Ame::find($id);
