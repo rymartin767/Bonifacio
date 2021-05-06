@@ -16,7 +16,8 @@ class CreateAmeCommentsTable extends Migration
         Schema::create('ame_comments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('ame_id')->constrained();
-            $table->unsignedBigInteger('user_id');
+            $table->string('name');
+            $table->unsignedBigInteger('employee_number');
             $table->text('body');
             $table->timestamps();
         });

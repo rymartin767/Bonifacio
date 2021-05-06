@@ -11,7 +11,8 @@ class AmeCommentsController extends Controller
     {
         try {
             $attributes = request()->validate([
-                'user_id' => ['required', 'numeric'],
+                'name' => ['required', 'string'],
+                'employee_number' => ['required', 'numeric'],
                 'body' => ['required', 'string', 'min:5', 'max:999']
             ]);
 

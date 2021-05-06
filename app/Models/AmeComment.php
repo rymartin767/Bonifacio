@@ -11,7 +11,7 @@ class AmeComment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'body'
+        'name', 'employee_number', 'body'
     ];
 
     protected static function booted()
