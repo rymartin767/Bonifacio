@@ -19,13 +19,13 @@ class AmeCommentsController extends Controller
             $ame = Ame::find($id);
             if($ame) {
                 $ame->comments()->create($attributes);
-                return response()->json(['data' => ['success']], 201);
+                return response()->json(['data' => 'success'], 201);
             }
 
-            return response()->json(['data' => ['AME Model Not Found!']], 422);
+            return response()->json(['data' => 'AME Model Not Found!'], 422);
 
         } catch (ValidationException $e) {
-            return response()->json(['data' => [$e->getMessage()]], 422);
+            return response()->json(['data' => $e->getMessage()], 422);
         } 
     }
 }
