@@ -19,24 +19,9 @@ class Ame extends Model
 
     protected $withCount = ['comments'];
 
-    // public function getPhoneAttribute($value)
-    // {
-    //     $subOne = substr($value, 0, 3);
-    //     $subTwo = substr($value, 3, 3);
-    //     $subThree = substr($value, 6, 4);
-
-    //     return $subOne . '-' . $subTwo . '-' . $subThree;
-
-    // }
-
     public function comments()
     {
-        return $this->hasMany(AmeComment::class);
-    }
-
-    public function ratings()
-    {
-    return $this->hasMany(AmeRating::class);
+        return $this->morphMany(Comment::class, 'commentable');
     }
     
 }
