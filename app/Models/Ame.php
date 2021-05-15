@@ -19,6 +19,26 @@ class Ame extends Model
 
     protected $withCount = ['comments'];
 
+    public function scopeState($query, $state)
+    {
+        $query->when($state, function ($query, $state) {
+            return $query
+                ->where('state', $state);
+        }, function ($query) {
+            return $query;
+        });
+    }
+
+    public function scopeSearch($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, function ($query, $search) {
+            return $query
+                ->where('name', 'like', '%' . $search . '%');
+        }, function ($query) {
+            return $query;
+        });
+    }
+
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
