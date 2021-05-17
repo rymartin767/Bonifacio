@@ -24,6 +24,7 @@ class CreateVacanciesTable extends Migration
             $table->string('award_fleet')->index();
             $table->string('award_seat')->index();
             $table->boolean('upgrade')->index();
+            $table->boolean('new_hire');
             $table->date('month')->index();
             $table->timestamps();
         });

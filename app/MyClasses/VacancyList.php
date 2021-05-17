@@ -57,6 +57,7 @@ class VacancyList
                 'award_base' => $subset[3],
                 'award_fleet' => $subset[4],
                 'award_seat' => $subset[5],
+                'new_hire' => $award[2] === 'HIRED' ? true : false,
                 'month' => $this->month()
             ]);
 
@@ -77,6 +78,7 @@ class VacancyList
             'award_base' => 'required|string|in:ANC,CVG,HHN,HSV,IAH,ICN,JFK,LAX,MIA,NRT,ONT,ORD,PAE,SYD,TPE',
             'award_seat' => 'required|string|in:CA,FO',
             'award_fleet' => 'required|string|in:767,747',
+            'new_hire' => ['required', 'boolean'],
             'month' => 'required|date'
         ]);
 
@@ -95,6 +97,7 @@ class VacancyList
             'award_seat' => $request->award_seat,
             'award_fleet' => $request->award_fleet,
             'upgrade' => $request->seat === $request->award_seat ? false : true,
+            'new_hire' => $request->new_hire,
             'month' => $this->month()
         ]);
 
