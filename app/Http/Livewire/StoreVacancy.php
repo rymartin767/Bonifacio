@@ -41,7 +41,7 @@ class StoreVacancy extends Component
     public function render()
     {
         return view('livewire.store-vacancy', [
-            'files' => Storage::disk('s3')->allFiles('/archives/vacancy-awards/2021/tsv')
+            'files' => Storage::allFiles('/vacancy-awards/')
         ]);
     }
 }
