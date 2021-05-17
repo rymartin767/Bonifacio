@@ -9,10 +9,12 @@ use Livewire\Component;
 class VacancyDetails extends Component
 {
     public $upgrades;
+    public $new_hires;
 
     public function mount()
     {
         $this->upgrades = Vacancy::where('upgrade', 1)->count();
+        $this->new_hires = Vacancy::where('new_hire', 1)->count();
     }
 
     public function truncateAwards()
