@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use Exception;
+use Illuminate\Validation\ValidationException;
 
 class EventsController extends Controller
 {
@@ -19,16 +19,17 @@ class EventsController extends Controller
             $attributes = request()->validate([
                 'user_id' => ['required', 'numeric'],
                 'title' => ['required', 'string', 'min:3', 'max:50'],
-                'datetime' => ['required', 'date'],
-                'image' => ['string', 'nullable', 'min:5', 'max:100'],
-                'url' => ['string', 'nullable', 'min:5', 'max:100'],
+                'date' => ['required', 'date'],
+                'time' => ['sometimes', 'nullable', 'date_format:H:i'],
+                'image' => ['sometimes', 'nullable', 'string', 'min:5', 'max:100'],
+                'url' => ['sometimes', 'nullable', 'string', 'min:5', 'max:100'],
             ]);
 
             Event::create($attributes);
 
             return response()->json(['data' => 'Success'], 201);
         }
-        catch (Exception $e) {
+        catch (ValidationException $e) {
             return response()->json(['data' => [$e->getMessage()]], 422);
         }
 

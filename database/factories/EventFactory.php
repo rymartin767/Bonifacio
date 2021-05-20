@@ -24,7 +24,8 @@ class EventFactory extends Factory
         return [
             'user_id' => 1,
             'title' => 'Event Title',
-            'datetime' => now(),
+            'date' => $this->faker->date(),
+            'time' => $this->faker->time('H:i'),
             'image' => $this->faker->imageUrl(),
             'url' => $this->faker->url
         ];

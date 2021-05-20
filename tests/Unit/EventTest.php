@@ -68,11 +68,27 @@ class EventTest extends TestCase
         $response->assertExactJson(['data' => ['The given data was invalid.']], 422);    
     }
 
-    public function test_event_datetime_validation()
+    public function test_event_date_validation()
     {
         $this->asSanctum();
 
-        $response = $this->post('/api/events', Event::factory()->raw(['datetime' => 'not a date time']));
+        $response = $this->post('/api/events', Event::factory()->raw(['date' => 'not a valid date']));
+        $response->assertExactJson(['data' => ['The given data was invalid.']], 422);    
+    }
+
+    public function test_event_time_is_nullable()
+    {
+        $this->asSanctum();
+
+        $response = $this->post('/api/events', Event::factory()->raw(['time' => null]));
+        $response->assertStatus(201);    
+    }
+
+    public function test_event_time_validation()
+    {
+        $this->asSanctum();
+
+        $response = $this->post('/api/events', Event::factory()->raw(['time' => 'not a valid time']));
         $response->assertExactJson(['data' => ['The given data was invalid.']], 422);    
     }
 
