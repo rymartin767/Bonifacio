@@ -2,13 +2,13 @@
 
 use App\Http\Controllers\AirlineController;
 use App\Http\Controllers\AmeCommentsController;
-use App\Http\Controllers\AmeReviewsController;
 use App\Http\Controllers\AmesController;
 use App\Http\Controllers\AtlasPayRatesController;
 use App\Http\Controllers\AwardsController;
 use App\Http\Controllers\DomicilesController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeScalesController;
+use App\Http\Controllers\EventsController;
 use App\Http\Controllers\MonthlyStaffingChartController;
 use App\Http\Controllers\RetirementChartController;
 use App\Http\Controllers\SeniorityController;
@@ -64,11 +64,11 @@ Route::delete('ames/{id}', [AmesController::class, 'destroy'])->middleware('auth
 
 Route::post('ames/{id}/comments', [AmeCommentsController::class, 'store'])->middleware('auth:sanctum');
 
-Route::get('reviews', [AmeReviewsController::class, 'index'])->middleware('auth:sanctum');
-Route::post('reviews', [AmeReviewsController::class, 'store'])->middleware('auth:sanctum');
-
 Route::get('domiciles', [DomicilesController::class, 'index'])->middleware('auth:sanctum');
 Route::get('domicile', [DomicilesController::class, 'show'])->middleware('auth:sanctum');
+
+Route::get('events', [EventsController::class, 'index'])->middleware('auth:sanctum');
+Route::post('events', [EventsController::class, 'store'])->middleware('auth:sanctum');
 
 // Apex Charts
 Route::get('monthlyStaffingChart', MonthlyStaffingChartController::class)->middleware('auth:sanctum');
