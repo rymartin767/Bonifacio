@@ -20,9 +20,9 @@ class EventsController extends Controller
                 'user_id' => ['required', 'numeric'],
                 'title' => ['required', 'string', 'min:3', 'max:50'],
                 'date' => ['required', 'date'],
-                'time' => ['sometimes', 'nullable', 'date_format:H:i'],
-                'image' => ['sometimes', 'nullable', 'string', 'min:5', 'max:100'],
-                'url' => ['sometimes', 'nullable', 'string', 'min:5', 'max:100'],
+                'time' => ['present', 'date_format:H:i', 'nullable'],
+                'image' => ['present', 'string', 'min:5', 'max:100', 'nullable'],
+                'url' => ['present', 'string', 'min:5', 'max:100', 'nullable'],
             ]);
 
             Event::create($attributes);
