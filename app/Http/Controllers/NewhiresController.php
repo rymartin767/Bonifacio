@@ -8,7 +8,7 @@ class NewhiresController extends Controller
 {
     public function index()
     {
-        $newhires = Vacancy::where('new_hire', true)->get()->sortBy('award_fleet');
+        $newhires = Vacancy::where('new_hire', true)->get()->groupBy('award_fleet');
         return response()->json(['data' => $newhires], 200);
     }
 }
