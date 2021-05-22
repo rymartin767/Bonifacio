@@ -10,6 +10,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeScalesController;
 use App\Http\Controllers\EventsController;
 use App\Http\Controllers\MonthlyStaffingChartController;
+use App\Http\Controllers\NewhiresController;
 use App\Http\Controllers\RetirementChartController;
 use App\Http\Controllers\SeniorityController;
 use App\Http\Controllers\UpgradesController;
@@ -47,6 +48,7 @@ Route::get('awards', AwardsController::class)->middleware(['auth:sanctum']);
 Route::get('employee', EmployeeController::class)->middleware(['auth:sanctum']);
 
 Route::get('upgrades', [UpgradesController::class, 'index'])->middleware('auth:sanctum');
+Route::get('newhires', [NewhiresController::class, 'index'])->middleware('auth:sanctum');
 
 // Seniority List Family
 Route::get('seniorities', [SeniorityController::class, 'show'])->middleware('auth:sanctum');
