@@ -62,7 +62,7 @@ class SeniorityController extends Controller
 
             $latest_list = Seniority::where('month', $months->last())->get();
             $previous_list_count = Seniority::where('month', $months->first())->count();
-            $january_list_count = Seniority::where('month', 'JAN 2021')->count();
+            $january_list_count = Seniority::where('month', '2021-01-01')->count();
 
             $ages = collect();
             foreach($latest_list as $pilot) {
