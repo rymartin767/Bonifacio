@@ -58,7 +58,7 @@ class SeniorityController extends Controller
     public function breakdown()
     {
         try {
-            $months = Seniority::pluck('month')->unique()->sort()->take(2);
+            $months = Seniority::pluck('month')->unique()->sortDesc()->take(2);
 
             $latest_list = Seniority::where('month', $months->last())->get();
             $previous_list_count = Seniority::where('month', $months->first())->count();
