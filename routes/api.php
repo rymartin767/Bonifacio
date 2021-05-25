@@ -53,6 +53,7 @@ Route::get('newhires', [NewhiresController::class, 'index'])->middleware('auth:s
 // Seniority List Family
 Route::get('seniorities', [SeniorityController::class, 'show'])->middleware('auth:sanctum');
 Route::get('seniorityList', [SeniorityController::class, 'index'])->middleware('auth:sanctum');
+Route::get('seniorityListBreakdown', [SeniorityController::class, 'breakdown'])->middleware('auth:sanctum');
 
 Route::get('charts/monthlyStaffing', MonthlyStaffingChartController::class)->middleware('auth:sanctum');
 
