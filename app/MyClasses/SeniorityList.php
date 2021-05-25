@@ -6,63 +6,40 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Seniority;
 use Carbon\Carbon;
 use Exception;
 
-
 class SeniorityList
 {
-    public function __construct(string $pathToCsv)
+    public function __construct(public string $pathToTsv)
     {
-        $this->pathToTsv = $pathToCsv;
+        $this->month = Carbon::parse(Str::of($this->pathToTsv)->replace('_', '/')->substr(-14, 10));
     }
 
-    public function validatePilotData(string $pathToCsv, Carbon $month)
+    public function parsedTsvToCollection() : Collection
     {
-        $validated = collect([]);
-        
         try {
-            $csv = Storage::disk('s3')->get($pathToCsv);
+            $parsed = collect();
 
-            foreach ($this->explodePilotData($csv) as $pilot) {
-                $request = $this->makePilotRequest($pilot, $month);
-                
-                $validator = $this->validatePilotRequest($request);
-                
-                if ($validator->fails()) {
-                    $error = $validator->errors()->first();
-                } else {
-                    $validated->push($request);
-                }
-            }
+            $tsvFileContents = Storage::disk('s3')->get($this->pathToTsv);
             
-            return $validated;
-        } catch (Exception $e) {
-            //
-        }
-    }
-
-    protected function explodePilotData($csv)
-    {
-        $pilots = collect([]);
-
-        try {
-            $rows = explode("\r\n", $csv);
+            $rows = explode("\r\n", $tsvFileContents);
             foreach($rows as $row) { 
-                $data = explode(",", $row);
+                $data = explode("\t", $row);
                 $data = array_filter($data);
                 $data = collect(array_values($data));
-                $pilots->push($data);
+                $parsed->push($data);
             }
-        } catch (Exception $e) {
-            //
-        }
     
-        return $pilots;
+            return $parsed;
+        } catch (Exception) {
+            return collect();
+        }
     }
 
-    protected function makePilotRequest($pilot, Carbon $month)
+    public function makePilotRequest($pilot) : Request
     {
         $act = $pilot[count($pilot)-2];
         if($act == 'LOA' || $act == 'MIL' || $act == 'MGMT' ||  $act == 'LMED') {
@@ -84,13 +61,13 @@ class SeniorityList
             'domicile' => $domicile ?? $pilot[count($pilot) - 2],
             'retire' => Carbon::parse($pilot[count($pilot) - 1]),
             'active' => $active ?? true,
-            'month' => $month
+            'month' => $this->month
         ]);
 
         return $request;
     }
 
-    protected function validatePilotRequest($request)
+    public function validatePilotRequest($request)
     {
         $validator = Validator::make($request->all(), [
             'sen' => 'required|numeric|digits_between:1,4',
@@ -108,9 +85,10 @@ class SeniorityList
         return $validator;
     }
 
-    public function storePilotData(Collection $validated, Carbon $month)
+    public function storePilotData(Collection $validated)
     {
         $total = 0;
+
         foreach ($validated as $pilot) {
             Seniority::create([
                 'sen' => $pilot->sen,
@@ -122,7 +100,7 @@ class SeniorityList
                 'domicile' => $pilot->domicile,
                 'retire' => Carbon::parse($pilot->retire),
                 'active' => $pilot->active,
-                'month' => $month
+                'month' => $this->month
             ]);
             $total++;
         }
