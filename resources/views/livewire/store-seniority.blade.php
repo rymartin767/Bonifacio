@@ -7,7 +7,7 @@
         <div class="px-4 py-2">
             <label for="months" class="form-label">{{ __('Months In Database') }}</label>
             <div class="grid grid-cols-6 gap-3">
-                @forelse($savedMonths as $month)
+                @forelse($months as $month)
                     <div class="col-span-2 sm:col-span-1 bg-green-300 p-2 text-white text-sm text-center rounded shadow">
                         {{ \Carbon\Carbon::parse($month)->format('M Y') }}
                     </div>
@@ -21,7 +21,7 @@
                 <label class="form-label">
                     AWS Files
                 </label>
-                <select wire:model="pathToCsv" class="form-input ">
+                <select wire:model="s3PathToFile" class="form-input ">
                     <option value="">Select One...</option>
                     @foreach($files as $file)
                         <option value="{{ $file }}">{{ $file }}</option>
@@ -31,7 +31,7 @@
             <div class="mt-4">
                 <div class="flex items-center justify-end px-4 py-3 bg-gray-100">
                     @isset($status)
-                        <div x-data="{ shown: false, timeout: null }" x-init="() => { clearTimeout(timeout); shown = true; timeout = setTimeout(() => { shown = false }, 2000); }" x-show.transition.opacity.out.duration.1500ms="shown" class="text-sm text-green-400 mr-6 pt-1">{{ $status }}</div>
+                        <div x-data="{ shown: false, timeout: null }" x-init="() => { clearTimeout(timeout); shown = true; timeout = setTimeout(() => { shown = false }, 5000); }" x-show.transition.opacity.out.duration.1500ms="shown" class="text-sm text-green-400 mr-6 pt-1">{{ $status }}</div>
                     @endisset
                     <button type="submit" class="btn">
                         <svg wire:loading wire:target="submitForm" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
