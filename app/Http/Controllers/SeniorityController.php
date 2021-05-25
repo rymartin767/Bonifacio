@@ -71,13 +71,13 @@ class SeniorityController extends Controller
             }
 
             $breakdown = collect([
-                "List Month" => $latest_list->first()->month,
+                "List Month" => Carbon::parse($latest_list->first()->month)->format('m/d/y'),
                 "Total" => $latest_list->count(),
                 "Active" => $latest_list->where('active', true)->count(),
                 "Inactive" => $latest_list->where('active', false)->count(),
                 "Net Gain" => $latest_list->count() - $previous_list_count,
                 "Annual Gain" => $latest_list->count() - $january_list_count,
-                "Average Age" => $ages->average()
+                "Average Age" => round($ages->average())
             ]);
 
             return response()->json(['data' => $breakdown], 200);
