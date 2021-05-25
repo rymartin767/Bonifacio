@@ -60,8 +60,8 @@ class SeniorityController extends Controller
         try {
             $months = Seniority::pluck('month')->unique()->sortDesc()->take(2);
 
-            $latest_list = Seniority::where('month', $months->last())->get();
-            $previous_list_count = Seniority::where('month', $months->first())->count();
+            $latest_list = Seniority::where('month', $months->first())->get();
+            $previous_list_count = Seniority::where('month', $months->last())->count();
             $january_list_count = Seniority::where('month', '2021-01-01')->count();
 
             $ages = collect();
@@ -71,7 +71,7 @@ class SeniorityController extends Controller
             }
 
             $breakdown = collect([
-                "List Month" => $latest_list->last()->month,
+                "List Month" => $latest_list->first()->month,
                 "Total" => $latest_list->count(),
                 "Active" => $latest_list->where('active', true)->count(),
                 "Inactive" => $latest_list->where('active', false)->count(),
