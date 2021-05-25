@@ -55,7 +55,7 @@ class SeniorityController extends Controller
         ]);
     }
 
-    public function breakdown()
+    public function staffing()
     {
         try {
             $months = Seniority::pluck('month')->unique()->sortDesc()->take(2);
