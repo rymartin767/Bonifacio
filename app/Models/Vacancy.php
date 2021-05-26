@@ -16,4 +16,13 @@ class Vacancy extends Model
     protected $casts = [ 
         'month' => 'date:M Y'
     ];
+
+    public function scopeUpgrades($query, $fleet)
+    {
+        if($fleet) {
+            return $query->where('upgrades', true)->groupBy('award_fleet');
+        }
+
+        return $query->where('upgrades', true)->sortyBy('emp');
+    }
 }
