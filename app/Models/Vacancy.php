@@ -17,12 +17,8 @@ class Vacancy extends Model
         'month' => 'date:M Y'
     ];
 
-    public function scopeUpgrades($query, $fleet)
+    public function scopeUpgrades($query)
     {
-        if($fleet) {
-            return $query->where('upgrades', true)->groupBy('award_fleet');
-        }
-
-        return $query->where('upgrades', true)->sortyBy('emp');
+        return $query->where('upgrade', true);
     }
 }

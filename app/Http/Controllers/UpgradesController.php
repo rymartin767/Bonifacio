@@ -8,7 +8,7 @@ class UpgradesController extends Controller
 {
     public function index()
     {
-        $upgrades = Vacancy::upgrades(request('fleet'))->get();
+        $upgrades = request('groupByFleet') ? Vacancy::upgrades()->get()->groupBy('award_fleet') : Vacancy::upgrades()->get()->sortBy('emp');
         return response()->json(['data' => $upgrades], 200);
     }
 }
