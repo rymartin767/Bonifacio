@@ -27,7 +27,7 @@ class EventFactory extends Factory
             'date' => $this->faker->date(),
             'time' => $this->faker->time('H:i'),
             'image' => $this->faker->imageUrl(),
-            'url' => $this->faker->url
+            'url' => $this->faker->url()
         ];
     }
 }
