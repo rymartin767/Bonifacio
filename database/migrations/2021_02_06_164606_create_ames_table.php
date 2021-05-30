@@ -21,6 +21,7 @@ class CreateAmesTable extends Migration
             $table->string('state');
             $table->string('zip');
             $table->string('phone');
+            $table->string('url')->nullable();
             $table->string('rating')->nullable();
             $table->timestamps();
         });

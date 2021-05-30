@@ -39,4 +39,12 @@ class AmesControllerTest extends TestCase
 
         $response->assertJsonFragment(["name" => "Ryan Martin"]);
     }
+
+    public function test_ames_store_success()
+    {
+        $this->asSanctum();
+        $this->post('api/ames', Ame::factory()->raw())->assertStatus(201);
+        
+        $this->assertDatabaseHas('ames', ['id' => 1]);
+    }
 }

@@ -10,7 +10,7 @@ class Ame extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'street', 'city', 'state', 'zip', 'phone', 'rating'
+        'name', 'street', 'city', 'state', 'zip', 'phone', 'url', 'rating'
     ];
 
     protected $casts = [

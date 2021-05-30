@@ -26,8 +26,9 @@ class AmeFactory extends Factory
             'street' => $this->faker->streetName,
             'city' => $this->faker->city,
             'state' => 'OH',
-            'zip' => $this->faker->postcode,
-            'phone' => $this->faker->phoneNumber
+            'zip' => $this->faker->postcode(),
+            'phone' => '888-888-8888',
+            'url' => $this->faker->url()
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Validation\Rule;
 use App\Models\Ame;
 use Exception;
+use Illuminate\Validation\ValidationException;
 
 class AmesController extends Controller
 {
@@ -16,16 +17,17 @@ class AmesController extends Controller
                 'street' => ['required', 'string', 'min:5', 'max:50'],
                 'city' => ['required', 'string', 'min:2', 'max:75'],
                 'state' => ['required', Rule::in(config('general.states'))],
-                'zip' => ['required', 'numeric', 'digits:5'],
-                'phone' => ['required', 'regex:/^(\+0?1\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'],
+                'zip' => ['required', 'regex:/^[0-9]{5}(?:-[0-9]{4})?$/'],
+                'phone' => ['required', 'regex:/^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/'],
+                'url' => ['present', 'nullable', 'regex:#\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))#iS']
             ]);
 
             $ame = Ame::create($attributes);
             
             return response()->json(['data' => $ame], 201);
-        } catch (Exception $e) {
+        } catch (ValidationException $e) {
             return response()->json(['data' => [
-                'errors' => $e->getMessage()
+                'errors' => $e->errors()
             ]], 422);
         }
     }
