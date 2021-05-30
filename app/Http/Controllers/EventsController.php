@@ -30,8 +30,23 @@ class EventsController extends Controller
             return response()->json(['data' => 'Success'], 201);
         }
         catch (ValidationException $e) {
-            return response()->json(['data' => [$e->getMessage()]], 422);
+            return response()->json(['data' => [
+                'errors' => $e->getMessage()
+            ]], 422);
         }
 
+    }
+
+    public function destroy($id)
+    {
+        $event = Event::destroy($id);
+
+        if($event) {
+            return response()->json(['data' => ['Success!']], 200);
+        }
+
+        return response()->json(['data' => [
+            'errors' => 'Model Not Found!'
+        ]], 404);
     }
 }
