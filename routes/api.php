@@ -72,6 +72,7 @@ Route::get('domicile', [DomicilesController::class, 'show'])->middleware('auth:s
 
 Route::get('events', [EventsController::class, 'index'])->middleware('auth:sanctum');
 Route::post('events', [EventsController::class, 'store'])->middleware('auth:sanctum');
+Route::delete('events/{id}', [EventsController::class, 'destroy'])->middleware('auth:sanctum');
 
 // Apex Charts
 Route::get('monthlyStaffingChart', MonthlyStaffingChartController::class)->middleware('auth:sanctum');
