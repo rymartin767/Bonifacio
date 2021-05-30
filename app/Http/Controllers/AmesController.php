@@ -24,7 +24,9 @@ class AmesController extends Controller
             
             return response()->json(['data' => $ame], 201);
         } catch (Exception $e) {
-            return response()->json(['data' => [$e->getMessage()]], 422);
+            return response()->json(['data' => [
+                'errors' => $e->getMessage()
+            ]], 422);
         }
     }
 
@@ -45,7 +47,9 @@ class AmesController extends Controller
             return response()->json(['data' => $ame], 200);
         }
 
-        return response()->json(['data' => ['Model Not Found (You should be excepted, but are not']], 404);
+        return response()->json(['data' => [
+            'errors' => 'Model Not Found!'
+        ]], 404);
     }
 
     public function destroy($id)
@@ -56,6 +60,8 @@ class AmesController extends Controller
             return response()->json(['data' => ['Success!']], 200);
         }
 
-        return response()->json(['data' => ['Model Not Found (You should be excepted, but are not']], 404);
+        return response()->json(['data' => [
+            'errors' => 'Model Not Found!'
+        ]], 404);
     }
 }
