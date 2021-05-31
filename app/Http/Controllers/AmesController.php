@@ -4,21 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Validation\Rule;
 use App\Models\Ame;
-use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class AmesController extends Controller
 {
-    public function store()
+    public function store(Request $request)
     {
         try {
-            $attributes = request()->validate([
-                'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/'],
+            $attributes = $request->validate([
+                'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/', 
+                                Rule::unique('ames')->where(function ($query) use ($request) {
+                                    return $query->where('street', $request->street);
+                                })],
                 'street' => ['required', 'string', 'min:5', 'max:50'],
                 'city' => ['required', 'string', 'min:2', 'max:75'],
                 'state' => ['required', Rule::in(config('general.states'))],
                 'zip' => ['required', 'regex:/^[0-9]{5}(?:-[0-9]{4})?$/'],
-                'phone' => ['required', 'regex:/^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/'],
+                'phone' => ['required', 'regex:/^\(?([0-9]{3})\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$/', 'unique:ames'],
                 'url' => ['present', 'nullable', 'regex:#\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))#iS']
             ]);
 
