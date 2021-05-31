@@ -22,12 +22,12 @@ class AmeFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->name,
-            'street' => $this->faker->streetName,
-            'city' => $this->faker->city,
-            'state' => 'OH',
+            'name' => $this->faker->name(),
+            'street' => $this->faker->streetAddress(),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->stateAbbr(),
             'zip' => $this->faker->postcode(),
-            'phone' => '888-888-8888',
+            'phone' => $this->faker->numerify('###-###-####'),
             'url' => $this->faker->url()
         ];
     }
