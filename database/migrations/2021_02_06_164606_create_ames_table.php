@@ -24,6 +24,9 @@ class CreateAmesTable extends Migration
             $table->string('url')->nullable();
             $table->string('rating')->nullable();
             $table->timestamps();
+
+            $table->unique('phone');
+            $table->unique(['name', 'street']);
         });
     }
 
