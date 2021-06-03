@@ -13,7 +13,7 @@ class AmesController extends Controller
     {
         try {
             $attributes = $request->validate([
-                'name' => ['required', 'string', 'min:5', 'max:50', 'regex:/^([^0-9]*)$/', 
+                'name' => ['required', 'string', 'min:2', 'max:50', 'regex:/^([^0-9]*)$/', 
                                 Rule::unique('ames')->where(function ($query) use ($request) {
                                     return $query->where('street', $request->street);
                                 })],
