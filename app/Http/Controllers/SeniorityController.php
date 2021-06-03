@@ -71,7 +71,7 @@ class SeniorityController extends Controller
             }
 
             $breakdown = collect([
-                "List Month" => Carbon::parse($latest_list->first()->month)->format('m/d/y'),
+                "List Date" => Carbon::parse($latest_list->first()->month)->format('m/d/y'),
                 "Total" => $latest_list->count(),
                 "Active" => $latest_list->where('active', true)->count(),
                 "Inactive" => $latest_list->where('active', false)->count(),
